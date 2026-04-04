@@ -192,11 +192,11 @@
           <span class="mtz-label" style="margin-top:1rem;margin-bottom:0;">Camere disponibile</span>
         </div>
         <div class="flex flex-col items-center md:items-start text-center md:text-left" data-animate="fade-up">
-          <span class="mtz-stat">{{ $stats['quality'] }}</span>
+          <span class="mtz-stat" data-counter="100" data-suffix="%">{{ $stats['quality'] }}</span>
           <span class="mtz-label" style="margin-top:1rem;margin-bottom:0;">Materiale de calitate</span>
         </div>
         <div class="flex flex-col items-center md:items-start text-center md:text-left" data-animate="fade-up">
-          <span class="mtz-stat">{{ $stats['year'] }}</span>
+          <span class="mtz-stat" data-counter="{{ $stats['year'] }}" data-counter-start="{{ (int)$stats['year'] - 4 }}">{{ $stats['year'] }}</span>
           <span class="mtz-label" style="margin-top:1rem;margin-bottom:0;">An finalizare</span>
         </div>
       </div>

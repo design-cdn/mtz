@@ -49,9 +49,9 @@
 
 .mtz-footer__link {
   font-size: var(--text-xs);
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: var(--ls-nav);
   color: rgba(249, 248, 246, 0.35);
   text-decoration: none;
   transition: color var(--transition-fast);

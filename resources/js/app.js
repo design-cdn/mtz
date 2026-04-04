@@ -67,8 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Hero background scale-in ───────────────────────────
   initHeroBg();
 
-  // ── Scroll indicator nav ─────────────────────────────── 
-  // (gestionat via Alpine.js în nav.blade.php)
+  // ── Counter animation la scroll (highlights) ───────────
+  initCounterAnimations();
 
 });
 
@@ -152,5 +152,47 @@ function initHeroBg() {
       end: 'bottom top',
       scrub: true,
     },
+  });
+}
+/**
+ * Counter animation — numere care cresc la scroll.
+ * Trigger: [data-counter="<target>"], opțional:
+ *   data-suffix="%"         — adăugat după număr
+ *   data-counter-start="N" — valoare de pornire (default 0)
+ */
+const COUNTER_DURATION = 1.6;  // secunde
+
+function initCounterAnimations() {
+  const counters = gsap.utils.toArray('[data-counter]');
+  if (!counters.length) return;
+
+  counters.forEach(el => {
+    const target = parseFloat(el.dataset.counter);
+    const suffix = el.dataset.suffix ?? '';
+    const rawStart = el.dataset.counterStart;
+    const start  = rawStart !== undefined ? parseFloat(rawStart) : 0;
+
+    const obj = { val: start };
+
+    gsap.fromTo(
+      obj,
+      { val: start },
+      {
+        val: target,
+        duration: COUNTER_DURATION,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 88%',
+          once: true,
+        },
+        onUpdate() {
+          const v = Number.isInteger(target)
+            ? Math.round(obj.val)
+            : obj.val.toFixed(1);
+          el.textContent = v + suffix;
+        },
+      }
+    );
   });
 }

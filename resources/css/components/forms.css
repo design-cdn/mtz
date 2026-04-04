@@ -114,6 +114,10 @@
   accent-color: var(--color-secondary);
 }
 
+.mtz-checkbox-wrap label {
+  font-size: var(--text-sm);
+}
+
 /* Mesaj succes */
 .mtz-form-success {
   display: flex;

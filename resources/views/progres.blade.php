@@ -33,7 +33,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
 
           {{-- Sidebar sticky --}}
-          <div class="lg:col-span-3 lg:sticky lg:top-32 self-start" data-animate="fade-up">
+          <div class="lg:col-span-4 lg:sticky lg:top-32 self-start" data-animate="fade-up">
             <span class="mtz-label-secondary" style="display:block;margin-bottom:1rem;">{{ __('progres.update_label') }}</span>
             <h2 class="mtz-h2" style="font-size:var(--text-5xl);">
               {{ $update['month'] }}<br/>{{ $update['year'] }}
@@ -45,7 +45,7 @@
 
           {{-- Galerie cu lightbox --}}
           <div
-            class="lg:col-span-9"
+            class="lg:col-span-8"
             x-data='mtzLightbox(@json($update["images"]))'
             @keydown.escape.window="open = false"
             @keydown.arrow-left.window="open && go(-1)"

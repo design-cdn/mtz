@@ -24,7 +24,7 @@ return [
         'name'          => 'MTZ Nord Residence',
         'floors_total'  => 5,
         'location'      => 'Mangalia, județul Constanța',
-        'year'          => 2025,
+        'year'          => 2026,
         'whatsapp'      => '40700000000',
         'phone'         => '+40 700 000 000',
         'email'         => 'contact@mtznordresidence.ro',
