@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html class="light" lang="ro">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MTZ Nord Residence — Locul tău la mare, departe de aglomerație</title>
+<meta name="description" content="MTZ Nord Residence — Apartamente cu 1–4 camere în Mangalia. Design modern, materiale de calitate, comunitate restrânsă."/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary":           "#433a35",
+        "on-primary":        "#f9f8f6",
+        "secondary":         "#a69080",
+        "on-secondary":      "#1a1a1a",
+        "surface":           "#f9f8f6",
+        "on-surface":        "#1a1a1a",
+        "surface-variant":   "#e5e3e1",
+        "on-surface-variant":"#433a35",
+        "background":        "#fdfcfb",
+        "outline":           "#a69080",
+        "outline-variant":   "#d1cfcd",
+        "mocha-dark":        "#303334"
+      },
+      borderRadius: { DEFAULT:"0.25rem", lg:"0.5rem", xl:"1rem", full:"9999px" },
+      fontFamily: { headline:["Manrope"], body:["Manrope"], label:["Manrope"] }
+    }
+  }
+}
+</script>
+<link rel="stylesheet" href="mtz-design-system.css"/>
+<style>
+  /* Animații specifice acestei pagini */
+  @keyframes scrollline {
+    0%   { transform: translateY(-100%); }
+    100% { transform: translateY(200%); }
+  }
+  .mtz-scroll-line {
+    position: absolute; inset: 0;
+    background: rgba(255,255,255,0.6);
+    transform: translateY(-100%);
+    animation: scrollline 2s infinite;
+  }
+</style>
+</head>
+<body class="bg-background text-on-surface selection:bg-secondary/30 selection:text-on-surface">
+
+<!-- ═══ NAV ═══ -->
+<nav class="mtz-nav">
+  <div class="mtz-nav__inner">
+    <a href="/" class="mtz-nav__logo">MTZ Nord Residence</a>
+    <div class="hidden lg:flex items-center gap-8">
+      <a class="mtz-nav__link mtz-nav__link--active" href="/">Acasă</a>
+      <a class="mtz-nav__link" href="#apartamente">Apartamente</a>
+      <a class="mtz-nav__link" href="#proiect">Proiect</a>
+      <a class="mtz-nav__link" href="#localizare">Localizare</a>
+      <a class="mtz-nav__link" href="/progres">Progres șantier</a>
+      <a class="mtz-nav__link" href="#contact">Contact</a>
+    </div>
+    <div class="flex items-center gap-6">
+      <button class="mtz-btn-nav" onclick="document.getElementById('oferta-modal').classList.remove('hidden')">Cere ofertă</button>
+      <a class="mtz-btn-wa" href="https://wa.me/40700000000">
+        <svg class="w-4 h-4 fill-current" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.2-3.2-5.6-.3-8.6 2.4-11.3 2.5-2.4 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.5 5.5-9.2 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+        <span>WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="relative h-screen w-full overflow-hidden bg-white" style="padding-top:var(--nav-h)">
+    <div class="relative w-full h-full overflow-hidden">
+      <img alt="MTZ Nord Residence — vedere exterioară nocturnă"
+           class="mtz-img w-full h-full brightness-[0.85] scale-[1.02] transition-transform duration-[8000ms] ease-out"
+           src="mtz-hero.jpg"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent"></div>
+
+      <!-- Headline mic -->
+      <div class="absolute text-white" style="top:2.5rem;left:3rem;">
+        <span class="mtz-caption" style="color:rgba(255,255,255,0.5);display:block;margin-bottom:0.75rem;letter-spacing:0.35em;">Mangalia · Constanța</span>
+        <h1 class="mtz-h1-hero" style="color:rgba(255,255,255,0.9);">
+          Locul tău la mare,<br/>
+          <em class="not-italic" style="opacity:0.7;">departe de aglomerație.</em>
+        </h1>
+      </div>
+
+      <!-- SVG selector etaje (placeholder) -->
+      <div class="absolute bottom-0 left-0 right-0 flex flex-col items-center" style="padding-bottom:2rem;">
+        <span class="mtz-caption" style="color:rgba(255,255,255,0.4);letter-spacing:0.35em;margin-bottom:1rem;">Selectează etajul dorit</span>
+        <div class="w-full flex gap-1 justify-center" style="max-width:48rem;padding:0 3rem;">
+          <div class="flex-1 flex items-center justify-center cursor-pointer group" style="height:4rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(8px);transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+            <span class="mtz-caption" style="color:rgba(255,255,255,0.6);letter-spacing:0.1em;">Etaj 5</span>
+          </div>
+          <div class="flex-1 flex items-center justify-center cursor-pointer" style="height:4rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(8px);transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+            <span class="mtz-caption" style="color:rgba(255,255,255,0.6);letter-spacing:0.1em;">Etaj 4</span>
+          </div>
+          <div class="flex-1 flex items-center justify-center cursor-pointer" style="height:4rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(8px);transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+            <span class="mtz-caption" style="color:rgba(255,255,255,0.6);letter-spacing:0.1em;">Etaj 3</span>
+          </div>
+          <div class="flex-1 flex items-center justify-center cursor-pointer" style="height:4rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(8px);transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+            <span class="mtz-caption" style="color:rgba(255,255,255,0.6);letter-spacing:0.1em;">Etaj 2</span>
+          </div>
+          <div class="flex-1 flex items-center justify-center cursor-pointer" style="height:4rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(8px);transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+            <span class="mtz-caption" style="color:rgba(255,255,255,0.6);letter-spacing:0.1em;">Etaj 1</span>
+          </div>
+        </div>
+        <p class="mtz-caption" style="color:rgba(255,255,255,0.25);margin-top:0.75rem;">SVG interactiv · placeholder</p>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute flex flex-col items-center gap-3 cursor-pointer" style="bottom:2rem;right:3rem;">
+        <div class="relative overflow-hidden" style="height:2.5rem;width:1px;background:rgba(255,255,255,0.25);">
+          <div class="mtz-scroll-line"></div>
+        </div>
+        <span class="mtz-caption" style="color:rgba(255,255,255,0.3);writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:0.35em;">Scroll</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ DESPRE PROIECT ═══ -->
+  <section id="proiect" class="mtz-section mtz-section-surface">
+    <div class="mtz-container">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-20">
+        <div class="md:col-span-5">
+          <span class="mtz-label">Despre proiect</span>
+          <h2 class="mtz-h2">Un loc în care să te întorci cu drag.</h2>
+          <hr class="mtz-divider"/>
+        </div>
+        <div class="md:col-span-4 md:col-start-8 flex flex-col gap-6">
+          <p class="mtz-body-lg">MTZ Nord Residence este un ansamblu rezidențial nou construit în Mangalia, la câțiva pași de mare. Cinci etaje, apartamente cu una până la patru camere, materiale de calitate și spații gândite să fie cu adevărat locuibile — nu doar frumoase în randări.</p>
+          <p class="mtz-body-lg">Mangalia rămâne una dintre puținele zone de pe litoral unde liniștea nu e un lux. Fără aglomerație de sezon, fără zgomot. Un loc în care poți veni în weekend, în vacanță sau să te stabilești definitiv.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STATS ═══ -->
+  <section class="mtz-section-sm mtz-section-bg border-y border-outline-variant/30">
+    <div class="mtz-container">
+      <div class="mb-16">
+        <span class="mtz-label">Proiect în cifre</span>
+        <h2 class="mtz-h2">Date definitorii</h2>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-12 md:gap-24">
+        <div class="flex flex-col items-center md:items-start text-center md:text-left">
+          <span class="mtz-stat">5</span>
+          <span class="mtz-label" style="margin-top:1rem;margin-bottom:0;">Etaje</span>
+        </div>
+        <div class="flex flex-col items-center md:items-start text-center md:text-left">
+          <span class="mtz-stat">1–4</span>
+          <span class="mtz-label" style="margin-top:1rem;margin-bottom:0;">Camere disponibile</span>
+        </div>
+        <div class="flex flex-col items-center md:items-start text-center md:text-left">
+          <span class="mtz-stat">100%</span>
+          <span class="mtz-label" style="margin-top:1rem;margin-bottom:0;">Materiale de calitate</span>
+        </div>
+        <div class="flex flex-col items-center md:items-start text-center md:text-left">
+          <span class="mtz-stat">2025</span>
+          <span class="mtz-label" style="margin-top:1rem;margin-bottom:0;">An finalizare</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ GALERIE ═══ -->
+  <section id="galerie" class="mtz-section-sm mtz-section-surface overflow-hidden">
+    <div class="mtz-container">
+      <div class="flex items-end justify-between mb-20">
+        <div>
+          <span class="mtz-label">Galerie</span>
+          <h2 class="mtz-h2">Randări proiect</h2>
+        </div>
+        <a class="group flex items-center gap-4 pb-1 border-b border-outline-variant hover:border-primary transition-colors" href="#">
+          <span class="mtz-caption" style="letter-spacing:0.1em;color:var(--clr-primary);">VEZI TOATE</span>
+          <span class="material-symbols-outlined text-sm text-primary">arrow_forward</span>
+        </a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+        <div class="md:col-span-7 relative group">
+          <div class="mtz-img-wrap aspect-[4/5]">
+            <img class="mtz-img" src="mtz-hero.jpg" alt="MTZ Nord Residence — vedere exterioară nocturnă"/>
+          </div>
+          <div class="mtz-gallery-card absolute hidden md:block max-w-sm" style="bottom:-2.5rem;right:-2.5rem;">
+            <p class="mtz-label-secondary" style="margin-bottom:0.75rem;">Exterior · Vedere nocturnă</p>
+            <p class="mtz-body-sm">Fațada MTZ Nord Residence — cinci etaje cu balcoane generoase, tâmplărie modernă și vegetație integrată în arhitectura clădirii.</p>
+          </div>
+        </div>
+        <div class="md:col-span-4 md:col-start-9 mt-24">
+          <div class="mtz-img-wrap aspect-[3/4] mb-6 group">
+            <img class="mtz-img" src="mtz-interior.png" alt="MTZ Nord Residence — interior dormitor"/>
+          </div>
+          <h4 class="mtz-h4">Finisaje care contează</h4>
+          <p class="mtz-body-sm">Pardoseală din parchet în os de pește, dulap integrat, iluminat indirect — detalii care fac diferența dintre un apartament și un acasă.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ HIGHLIGHTS ═══ -->
+  <section id="apartamente" class="mtz-section mtz-section-surface mtz-border-top">
+    <div class="mtz-container">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+        <div class="lg:col-span-4">
+          <div class="mb-16">
+            <span class="mtz-label">De ce MTZ Nord</span>
+            <h2 class="mtz-h2">Ce primești când cumperi aici.</h2>
+            <hr class="mtz-divider"/>
+          </div>
+          <div class="mtz-img-wrap aspect-[4/5] shadow-xl group">
+            <img class="mtz-img" src="mtz-interior.png" alt="MTZ Nord Residence — interior dormitor"/>
+          </div>
+        </div>
+        <div class="lg:col-span-8 lg:pl-12">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12">
+
+            <div class="py-10 border-b border-outline-variant/30">
+              <div class="flex items-start gap-6">
+                <span class="mtz-feature-num">01</span>
+                <div>
+                  <h3 class="mtz-h3">Materiale de calitate</h3>
+                  <p class="mtz-body">Pardoseală, tâmplărie și finisaje selectate pentru durată, nu doar pentru randări. Ce vezi în proiect e ce primești la predare.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="py-10 border-b border-outline-variant/30">
+              <div class="flex items-start gap-6">
+                <span class="mtz-feature-num">02</span>
+                <div>
+                  <h3 class="mtz-h3">Spații verzi amenajate</h3>
+                  <p class="mtz-body">Vegetație integrată în fațadă și curte amenajată la sol — nu doar spații libere lăsate în beton.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="py-10 border-b border-outline-variant/30">
+              <div class="flex items-start gap-6">
+                <span class="mtz-feature-num">03</span>
+                <div>
+                  <h3 class="mtz-h3">Instalații moderne</h3>
+                  <p class="mtz-body">Sistem de climatizare, instalații electrice și sanitare dimensionate corect — nu la limita normativului.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="py-10 border-b border-outline-variant/30">
+              <div class="flex items-start gap-6">
+                <span class="mtz-feature-num">04</span>
+                <div>
+                  <h3 class="mtz-h3">Construcție sustenabilă</h3>
+                  <p class="mtz-body">Izolație termică superioară și materiale cu impact redus — costuri mai mici la întreținere pe termen lung.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="py-10 border-b border-outline-variant/30">
+              <div class="flex items-start gap-6">
+                <span class="mtz-feature-num">05</span>
+                <div>
+                  <h3 class="mtz-h3">Parcare inclusă</h3>
+                  <p class="mtz-body">Loc de parcare dedicat pentru fiecare apartament, în curtea ansamblului. Fără bătăi de cap la final de zi.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="py-10 border-b border-outline-variant/30">
+              <div class="flex items-start gap-6">
+                <span class="mtz-feature-num">06</span>
+                <div>
+                  <h3 class="mtz-h3">Număr mic de apartamente</h3>
+                  <p class="mtz-body">Un bloc, un număr limitat de unități. Știi cine îți sunt vecinii, nu ești unul din sute.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LOCALIZARE ═══ -->
+  <section id="localizare" class="relative w-full overflow-hidden" style="height:900px;background:var(--clr-background);">
+    <!-- Fade sus din culoarea secțiunii de deasupra -->
+    <div class="absolute top-0 left-0 right-0 z-20 pointer-events-none" style="height:380px;background:linear-gradient(to bottom,var(--clr-surface) 0%,var(--clr-surface) 15%,rgba(249,248,246,0.85) 40%,rgba(249,248,246,0.4) 65%,transparent 100%);"></div>
+    <!-- Google Maps -->
+    <div class="absolute inset-0">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22000!2d28.62!3d44.26!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b615e5f6c1c935%3A0x7e5e3b4c5a3b4e5f!2sMangalia!5e0!3m2!1sro!2sro!4v1700000000000"
+              width="100%" height="100%" style="border:0;filter:sepia(30%) saturate(70%) hue-rotate(10deg) brightness(1.05);" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <!-- Card puncte de interes -->
+    <div class="mtz-map-card absolute z-30 w-80" style="bottom:4rem;left:3rem;">
+      <span class="mtz-label">Localizare</span>
+      <h2 class="mtz-h2" style="font-size:var(--text-3xl);margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(67,58,53,0.05);">Mangalia</h2>
+      <div class="flex flex-col gap-5">
+        <div class="mtz-detail-row">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-secondary">beach_access</span>
+            <span class="mtz-body-sm" style="text-transform:uppercase;font-size:var(--text-xs);">Plaja Mangalia</span>
+          </div>
+          <span class="mtz-caption">10 min</span>
+        </div>
+        <div class="mtz-detail-row">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-secondary">restaurant</span>
+            <span class="mtz-body-sm" style="text-transform:uppercase;font-size:var(--text-xs);">Centrul vechi</span>
+          </div>
+          <span class="mtz-caption">15 min</span>
+        </div>
+        <div class="mtz-detail-row">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-secondary">directions_car</span>
+            <span class="mtz-body-sm" style="text-transform:uppercase;font-size:var(--text-xs);">Constanța</span>
+          </div>
+          <span class="mtz-caption">45 min</span>
+        </div>
+        <div class="mtz-detail-row">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-secondary">local_hospital</span>
+            <span class="mtz-body-sm" style="text-transform:uppercase;font-size:var(--text-xs);">Spital Municipal</span>
+          </div>
+          <span class="mtz-caption">5 min</span>
+        </div>
+        <div class="mtz-detail-row">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-secondary">shopping_cart</span>
+            <span class="mtz-body-sm" style="text-transform:uppercase;font-size:var(--text-xs);">Lidl · Kaufland</span>
+          </div>
+          <span class="mtz-caption">5 min</span>
+        </div>
+      </div>
+    </div>
+    <!-- Pin -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10" style="padding-top:12rem;">
+      <div class="relative flex items-center justify-center pointer-events-auto">
+        <div class="w-4 h-4 rounded-full animate-pulse z-20" style="background:var(--clr-secondary);box-shadow:0 0 0 8px rgba(166,144,128,0.2);"></div>
+        <div class="mtz-map-card absolute text-center" style="top:2rem;width:14rem;">
+          <span class="mtz-caption" style="margin-bottom:0.5rem;">MTZ Nord Residence</span>
+          <p class="mtz-body-sm" style="color:var(--clr-primary);font-weight:300;margin-bottom:1rem;">Mangalia,<br/>județul Constanța</p>
+          <div class="flex justify-center gap-4">
+            <a class="text-primary/60 hover:text-secondary transition-colors" href="tel:+40700000000"><span class="material-symbols-outlined text-lg">call</span></a>
+            <a class="text-primary/60 hover:text-secondary transition-colors" href="mailto:contact@mtznordresidence.ro"><span class="material-symbols-outlined text-lg">mail</span></a>
+            <a class="text-primary/60 hover:text-secondary transition-colors" href="#"><span class="material-symbols-outlined text-lg">location_on</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="mtz-section mtz-section-dark">
+    <div class="max-w-4xl mx-auto px-12 text-center">
+      <span class="mtz-label-dark" style="letter-spacing:var(--ls-label-xl);">Vorbim?</span>
+      <h2 class="mtz-h2-dark" style="margin-bottom:4rem;">Ai întrebări despre<br/>un apartament?</h2>
+      <p class="mtz-body-dark" style="text-transform:uppercase;letter-spacing:0.08em;font-size:var(--text-xs);margin-bottom:3rem;">Scrie-ne pe WhatsApp — răspundem în câteva ore, nu zile</p>
+      <div class="flex justify-center">
+        <a class="mtz-btn mtz-btn-cta gap-4" href="https://wa.me/40700000000">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.2-3.2-5.6-.3-8.6 2.4-11.3 2.5-2.4 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.5 5.5-9.2 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+          Discută pe WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT / FORMULAR ═══ -->
+  <section id="contact" class="mtz-section-dark">
+    <!-- Info strip -->
+    <div class="mtz-container" style="padding-top:6rem;padding-bottom:4rem;border-bottom:1px solid rgba(255,255,255,0.1);">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div>
+          <span class="mtz-label-dark">Adresă</span>
+          <p class="mtz-body-dark" style="font-size:var(--text-base);">Mangalia,<br/>județul Constanța</p>
+        </div>
+        <div>
+          <span class="mtz-label-dark">Telefon & Email</span>
+          <p class="mtz-body-dark" style="font-size:var(--text-base);">+40 700 000 000</p>
+          <p class="mtz-body-dark" style="font-size:var(--text-base);">contact@mtznordresidence.ro</p>
+        </div>
+        <div>
+          <span class="mtz-label-dark">Social media</span>
+          <div class="flex gap-6">
+            <a href="#" class="mtz-footer__link">Facebook</a>
+            <a href="#" class="mtz-footer__link">Instagram</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form area -->
+    <div class="mtz-container" style="padding-top:6rem;padding-bottom:6rem;">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+        <div class="lg:col-span-4">
+          <span class="mtz-label-dark">Contactează-ne</span>
+          <h2 class="mtz-h2-dark" style="font-size:var(--text-display);margin-bottom:1.5rem;">Suntem la un mesaj distanță.</h2>
+          <p class="mtz-body-dark">Completează formularul și te contactăm în cel mult 24 de ore. Dacă preferi, ne poți scrie direct pe WhatsApp.</p>
+          <a href="https://wa.me/40700000000" class="mtz-btn-wa" style="color:var(--clr-secondary);margin-top:2rem;display:inline-flex;gap:0.75rem;">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.2-3.2-5.6-.3-8.6 2.4-11.3 2.5-2.4 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.5 5.5-9.2 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+            Sau scrie pe WhatsApp
+          </a>
+        </div>
+        <div class="lg:col-span-8">
+          <form class="flex flex-col gap-6" action="/contact" method="POST">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="mtz-field"><label for="f-nume">Nume *</label><input id="f-nume" type="text" name="nume" placeholder="Ionescu" required/></div>
+              <div class="mtz-field"><label for="f-prenume">Prenume *</label><input id="f-prenume" type="text" name="prenume" placeholder="Andrei" required/></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="mtz-field"><label for="f-telefon">Telefon *</label><input id="f-telefon" type="tel" name="telefon" placeholder="+40 700 000 000" required/></div>
+              <div class="mtz-field"><label for="f-email">Email</label><input id="f-email" type="email" name="email" placeholder="andrei@exemplu.ro"/></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="mtz-field">
+                <label for="f-tip">Tip apartament</label>
+                <select id="f-tip" name="tip_apartament" onchange="this.classList.add('selected')">
+                  <option value="" disabled selected>Selectează tipul</option>
+                  <option value="1">Garsonieră / 1 cameră</option>
+                  <option value="2">2 camere</option>
+                  <option value="3">3 camere</option>
+                  <option value="4">4 camere</option>
+                  <option value="nedecis">Încă nu am decis</option>
+                </select>
+              </div>
+              <div class="mtz-field">
+                <label for="f-buget">Buget aproximativ</label>
+                <select id="f-buget" name="buget" onchange="this.classList.add('selected')">
+                  <option value="" disabled selected>Selectează intervalul</option>
+                  <option value="sub60k">Sub 60.000 €</option>
+                  <option value="60-90k">60.000 – 90.000 €</option>
+                  <option value="90-120k">90.000 – 120.000 €</option>
+                  <option value="peste120k">Peste 120.000 €</option>
+                  <option value="nedecis">Prefer să discutăm</option>
+                </select>
+              </div>
+            </div>
+            <div class="mtz-field">
+              <label for="f-mesaj">Mesaj</label>
+              <textarea id="f-mesaj" name="mesaj" placeholder="Ce te interesează? Etaj, orientare, finanțare — orice detaliu ne ajută să răspundem mai util."></textarea>
+            </div>
+            <div class="flex items-start gap-3">
+              <input type="checkbox" id="f-gdpr" name="gdpr" required class="mt-1 w-4 h-4 cursor-pointer accent-secondary" style="border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.05);border-radius:2px;"/>
+              <label for="f-gdpr" class="mtz-body-dark" style="cursor:pointer;">Sunt de acord cu <a href="#" style="color:var(--clr-secondary);">politica de confidențialitate</a>. Datele nu vor fi partajate cu terți.</label>
+            </div>
+            <div>
+              <button type="submit" class="mtz-btn mtz-btn-cta" style="padding:1.25rem 3rem;">Trimite cererea</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="mtz-footer">
+  <div class="mtz-footer__inner">
+    <div>
+      <p class="mtz-footer__logo">MTZ Nord Residence</p>
+      <p class="mtz-footer__tagline">Apartamente în Mangalia. La mare, fără aglomerație.</p>
+      <p class="mtz-footer__copy">© 2025 MTZ Nord Residence. Toate drepturile rezervate.</p>
+    </div>
+    <div class="flex gap-8 flex-wrap">
+      <a class="mtz-footer__link" href="#">Facebook</a>
+      <a class="mtz-footer__link" href="#">Instagram</a>
+      <a class="mtz-footer__link" href="#">Politică confidențialitate</a>
+      <a class="mtz-footer__link" href="#">GDPR</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ STICKY WHATSAPP ═══ -->
+<a href="https://wa.me/40700000000" class="mtz-wa-sticky" aria-label="WhatsApp">
+  <svg class="w-7 h-7 fill-white" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.2-3.2-5.6-.3-8.6 2.4-11.3 2.5-2.4 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.5 5.5-9.2 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+</a>
+
+<!-- ═══ MODAL OFERTĂ ═══ -->
+<div id="oferta-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6" style="background:rgba(48,51,52,0.92);">
+  <div style="background:var(--clr-dark);max-width:32rem;width:100%;border-radius:var(--radius-sm);border:1px solid rgba(255,255,255,0.1);overflow:hidden;">
+    <div class="flex justify-between items-center" style="padding:1.5rem 2.5rem;border-bottom:1px solid rgba(255,255,255,0.1);">
+      <span class="mtz-label-dark" style="margin-bottom:0;">Cere ofertă</span>
+      <button onclick="document.getElementById('oferta-modal').classList.add('hidden')" style="color:rgba(249,248,246,0.4);" class="hover:text-on-primary transition-colors">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div style="padding:2rem 2.5rem;">
+      <p class="mtz-body-dark" style="margin-bottom:2rem;">Lasă-ne numărul tău de telefon și te contactăm în câteva ore.</p>
+      <form action="/contact" method="POST" class="flex flex-col gap-5">
+        <div class="mtz-field"><label>Nume și prenume *</label><input type="text" name="nume" placeholder="Ionescu Andrei" required/></div>
+        <div class="mtz-field"><label>Telefon *</label><input type="tel" name="telefon" placeholder="+40 700 000 000" required/></div>
+        <div class="mtz-field"><label>Email</label><input type="email" name="email" placeholder="andrei@exemplu.ro"/></div>
+        <div class="flex items-start gap-3">
+          <input type="checkbox" id="m-gdpr" name="gdpr" required class="mt-1 w-4 h-4 cursor-pointer accent-secondary"/>
+          <label for="m-gdpr" class="mtz-body-dark" style="cursor:pointer;font-size:var(--text-xs);">Sunt de acord cu <a href="#" style="color:var(--clr-secondary);">politica de confidențialitate</a>.</label>
+        </div>
+        <button type="submit" class="mtz-btn mtz-btn-cta" style="width:100%;padding:1rem 2rem;">Trimite cererea</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

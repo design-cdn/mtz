@@ -1,0 +1,213 @@
+/* ── GALERIE ── */
+
+/* Overlaped caption card pe galerie home */
+.mtz-gallery-caption {
+  position: absolute;
+  bottom: -2.5rem;
+  right: -2.5rem;
+  background: var(--color-background);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-sm);
+  max-width: 22rem;
+}
+
+/* Scroll orizontal galerie mobile */
+.mtz-gallery-scroll {
+  display: flex;
+  gap: var(--space-sm);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: var(--space-sm);
+}
+
+.mtz-gallery-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.mtz-gallery-scroll > * {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+/* ── INDICATOR CLICK PE IMAGINE ── */
+
+.mtz-img-wrap--clickable {
+  cursor: pointer;
+  position: relative;
+}
+
+/* Overlay apare la hover */
+.mtz-img-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  background: rgba(67, 58, 53, 0.5);
+  opacity: 0;
+  transition: opacity var(--transition-med);
+  color: var(--color-text-light);
+  pointer-events: none;
+}
+
+.mtz-img-overlay__icon {
+  font-size: var(--icon-xl);
+  font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 48;
+}
+
+.mtz-img-wrap--clickable:hover .mtz-img-overlay,
+.mtz-img-wrap--clickable:focus-visible .mtz-img-overlay {
+  opacity: 1;
+}
+
+/* Badge persistent în colțul imaginii */
+.mtz-img-badge {
+  position: absolute;
+  bottom: var(--space-md);
+  right: var(--space-md);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(20, 18, 17, 0.72);
+  backdrop-filter: blur(8px);
+  color: rgba(249, 248, 246, 0.85);
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  pointer-events: none;
+}
+
+.mtz-img-badge .material-symbols-outlined {
+  font-size: var(--text-sm);
+  font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+}
+
+/* ── LIGHTBOX ── */
+
+.mtz-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mtz-lightbox__bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(18, 16, 15, 0.93);
+  backdrop-filter: blur(14px);
+}
+
+.mtz-lb__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: min(88vw, 1360px);
+  width: 100%;
+  padding: 0 var(--space-3xl);
+}
+
+.mtz-lb__img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-modal);
+  display: block;
+  user-select: none;
+}
+
+.mtz-lb__caption {
+  margin-top: var(--space-sm);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+  color: rgba(249, 248, 246, 0.3);
+  text-align: center;
+}
+
+.mtz-lb__counter {
+  position: fixed;
+  top: var(--space-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+  color: rgba(249, 248, 246, 0.3);
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.mtz-lb__close {
+  position: fixed;
+  top: var(--space-lg);
+  right: var(--space-lg);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  background: rgba(249, 248, 246, 0.07);
+  border: 1px solid rgba(249, 248, 246, 0.1);
+  border-radius: var(--radius-sm);
+  color: rgba(249, 248, 246, 0.5);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.mtz-lb__close:hover {
+  background: rgba(249, 248, 246, 0.14);
+  color: var(--color-text-light);
+}
+
+.mtz-lb__nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  background: rgba(249, 248, 246, 0.07);
+  border: 1px solid rgba(249, 248, 246, 0.1);
+  border-radius: var(--radius-sm);
+  color: rgba(249, 248, 246, 0.5);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.mtz-lb__nav:hover {
+  background: rgba(249, 248, 246, 0.14);
+  color: var(--color-text-light);
+}
+
+.mtz-lb__nav--prev { left: var(--space-lg); }
+.mtz-lb__nav--next { right: var(--space-lg); }
+
+@media (max-width: 768px) {
+  .mtz-lb__inner {
+    padding: 0 var(--space-md);
+  }
+  .mtz-lb__nav--prev { left: var(--space-xs); }
+  .mtz-lb__nav--next { right: var(--space-xs); }
+}

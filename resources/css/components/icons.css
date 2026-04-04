@@ -1,0 +1,59 @@
+/*
+ * Icon utility classes — Material Symbols sizing
+ * Replacement for inline style="font-size:Xrem" on icons.
+ * ─────────────────────────────────────────────────────────
+ * Usage: <span class="material-symbols-outlined mtz-icon-md">star</span>
+ *
+ * Sizes that map directly to text tokens are referenced through them.
+ * Sizes outside the text scale use dedicated --icon-* tokens.
+ */
+
+/* 16px — inline arrows, subtle indicators */
+.mtz-icon-base {
+  font-size: var(--text-base);
+}
+
+/* 18px — small inline icons next to text */
+.mtz-icon-sm {
+  font-size: var(--text-lg);
+}
+
+/* 20px — standard UI icon (button, input) */
+.mtz-icon {
+  font-size: var(--text-xl);
+}
+
+/* 24px — nav, modal close */
+.mtz-icon-md {
+  font-size: var(--text-2xl);
+}
+
+/* 32px — section/card icons */
+.mtz-icon-lg {
+  font-size: var(--text-3xl);
+}
+
+/* 36px — feature icons */
+.mtz-icon-xl {
+  font-size: var(--icon-lg);
+}
+
+/* 40px — lightbox, large UI */
+.mtz-icon-2xl {
+  font-size: var(--icon-xl);
+}
+
+/* 48px — display / empty state */
+.mtz-icon-3xl {
+  font-size: var(--icon-2xl);
+}
+
+/* ── Context-specific icon compositions ── */
+
+/* Contact page section icons (icon + color + spacing) */
+.mtz-contact-info-icon {
+  font-size: var(--text-3xl);
+  color: var(--color-secondary);
+  display: block;
+  margin-bottom: var(--space-md);
+}

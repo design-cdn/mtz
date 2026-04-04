@@ -1,0 +1,391 @@
+/* ── NAV ── */
+
+.mtz-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  transition: background-color var(--transition-fast), backdrop-filter var(--transition-fast);
+}
+
+.mtz-nav--scrolled {
+  background-color: rgba(253, 252, 251, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(209, 207, 205, 0.5);
+}
+
+.mtz-nav__inner {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: var(--container-px);
+  padding-right: var(--container-px);
+}
+
+@media (min-width: 768px) {
+  .mtz-nav__inner {
+    padding-left: var(--container-px-md);
+    padding-right: var(--container-px-md);
+  }
+}
+
+/* Desktop nav links — centrate pe viewport */
+.mtz-nav__links {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+  gap: var(--space-lg);
+  pointer-events: auto;
+}
+
+@media (min-width: 1024px) {
+  .mtz-nav__links {
+    display: flex;
+  }
+}
+
+/* Grupul din dreapta: CTA + WA + hamburger */
+.mtz-nav__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.mtz-nav__actions .mtz-btn-nav {
+  display: none;
+}
+
+.mtz-nav__actions .mtz-btn-wa {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .mtz-nav__actions .mtz-btn-nav {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 768px) {
+  .mtz-nav__actions .mtz-btn-wa {
+    display: inline-flex;
+  }
+}
+
+.mtz-nav__logo {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+
+.mtz-nav__logo:hover {
+  opacity: 0.7;
+}
+
+/* Nav over hero (transparent bg) — logo în alb */
+.mtz-nav--hero .mtz-nav__logo {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Hamburger alb pe hero */
+.mtz-nav--hero .mtz-nav__hamburger span {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.mtz-nav__link {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(67, 58, 53, 0.6);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  padding-bottom: 2px;
+}
+
+.mtz-nav__link:hover {
+  color: var(--color-text-primary);
+}
+
+.mtz-nav__link--active {
+  color: var(--color-text-primary);
+  border-bottom: 2px solid var(--color-text-primary);
+}
+
+/* Nav link stiluri peste hero */
+.mtz-nav--hero .mtz-nav__link {
+  color: rgba(255, 255, 255, 0.55);
+}
+.mtz-nav--hero .mtz-nav__link:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+.mtz-nav--hero .mtz-nav__link--active {
+  color: rgba(255, 255, 255, 0.9);
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+.mtz-btn-nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.5rem;
+  background-color: var(--color-dark);
+  color: var(--color-text-light);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), opacity var(--transition-fast);
+  font-family: var(--font-sans);
+  white-space: nowrap;
+}
+
+.mtz-btn-nav:hover {
+  background-color: var(--color-primary);
+}
+
+.mtz-btn-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: transparent;
+  color: rgba(67, 58, 53, 0.55);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.mtz-btn-wa:hover {
+  color: var(--color-text-primary);
+}
+
+/* WA alb când nav-ul e transparent peste hero */
+.mtz-nav--hero .mtz-btn-wa {
+  color: rgba(255, 255, 255, 0.7);
+}
+.mtz-nav--hero .mtz-btn-wa:hover {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Mobile nav toggle — ascuns pe desktop */
+.mtz-nav__hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+
+@media (min-width: 1024px) {
+  .mtz-nav__hamburger {
+    display: none;
+  }
+}
+
+.mtz-nav__hamburger span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background-color: var(--color-text-primary);
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+/* Animații hamburger → X */
+.mtz-nav__hamburger-line--top-open {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.mtz-nav__hamburger-line--mid-open {
+  opacity: 0;
+}
+
+.mtz-nav__hamburger-line--bot-open {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* ── Mobile menu — full-screen overlay ── */
+.mtz-nav__mobile {
+  position: fixed;
+  inset: 0;
+  background-color: var(--color-background);
+  z-index: var(--z-overlay);
+  display: grid;
+  grid-template-rows: auto 1fr auto;  /* header | items | footer */
+  overflow: hidden;
+  padding: 0 var(--container-px);
+
+  /* stare ascunsă */
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition:
+    opacity var(--transition-med),
+    visibility var(--transition-med);
+}
+
+.mtz-nav__mobile--open {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* Header: logo centrat + X */
+.mtz-nav__mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: var(--nav-h);
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--color-outline-variant);
+}
+
+.mtz-nav__mobile-logo {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.mtz-nav__mobile-close {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-xs);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xl);
+  font-weight: 300;
+  line-height: 1;
+  transition: opacity var(--transition-fast);
+}
+
+.mtz-nav__mobile-close:hover {
+  opacity: 0.6;
+}
+
+.mtz-nav__mobile-close .material-symbols-outlined {
+  font-size: var(--text-2xl);
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Lista de iteme */
+.mtz-nav__mobile-items {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mtz-nav__mobile-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;   /* redus din --space-md pentru încăpere pe mobile */
+  border-bottom: 1px solid var(--color-outline-variant);
+  text-decoration: none;
+  color: var(--color-text-primary);
+  transition: opacity var(--transition-fast);
+  flex-shrink: 0;               /* împíicam comprimarea item-ului */
+}
+
+.mtz-nav__mobile-item:hover {
+  opacity: 0.6;
+}
+
+.mtz-nav__mobile-item--active {
+  opacity: 0.4;
+}
+
+.mtz-nav__mobile-num {
+  font-size: var(--text-xs);
+  font-weight: 400;
+  color: var(--color-text-muted);
+  letter-spacing: var(--ls-label);
+  min-width: 2rem;
+  flex-shrink: 0;
+}
+
+.mtz-nav__mobile-label {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 6vw, 2rem);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wider);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mtz-nav__mobile-arrow {
+  font-size: var(--text-xl);
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.mtz-nav__mobile-item:hover .mtz-nav__mobile-arrow {
+  transform: translate(3px, -3px);
+}
+
+/* Footer: social + CTA */
+.mtz-nav__mobile-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) 0;
+  border-top: 1px solid var(--color-outline-variant);
+}
+
+.mtz-nav__mobile-social {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.mtz-nav__mobile-social-link {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.mtz-nav__mobile-social-link:hover {
+  color: var(--color-text-primary);
+}
+
+.mtz-nav__mobile-cta {
+  flex-shrink: 0;
+}

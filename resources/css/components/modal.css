@@ -1,0 +1,54 @@
+/* ── MODAL OFERTĂ ── */
+
+.mtz-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  background: rgba(48, 51, 52, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.mtz-modal {
+  background: var(--color-dark);
+  max-width: 32rem;
+  width: 100%;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  box-shadow: var(--shadow-modal);
+}
+
+.mtz-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mtz-modal__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(249, 248, 246, 0.35);
+  transition: color var(--transition-fast);
+  border-radius: var(--radius-sm);
+}
+
+.mtz-modal__close:hover {
+  color: var(--color-text-light);
+}
+
+.mtz-modal__body {
+  padding: var(--space-lg) 2.5rem var(--space-xl);
+}

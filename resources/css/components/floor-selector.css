@@ -1,0 +1,267 @@
+/* ── SELECTOR INTERACTIV ETAJE ── */
+
+.mtz-selector {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-bottom: var(--space-lg);
+  padding-left: var(--container-px);
+  padding-right: var(--container-px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  .mtz-selector {
+    padding-left: var(--container-px-md);
+    padding-right: var(--container-px-md);
+  }
+}
+
+.mtz-selector__label {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label-xl);
+  margin-bottom: var(--space-sm);
+}
+
+/* Fațadă placeholder */
+.mtz-selector__facade {
+  width: 100%;
+  max-width: 56rem;
+}
+
+.mtz-selector__floors {
+  display: flex;
+  gap: 2px;
+  width: 100%;
+}
+
+.mtz-selector__floor {
+  flex: 1;
+  height: 4.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background var(--transition-fast), border-color var(--transition-fast),
+              transform var(--transition-fast);
+  border-radius: var(--radius-sm);
+}
+
+.mtz-selector__floor:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+.mtz-selector__floor--active {
+  background: rgba(166, 144, 128, 0.25);
+  border-color: rgba(166, 144, 128, 0.6);
+}
+
+.mtz-selector__floor-label {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.mtz-selector__floor-count {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Legendă */
+.mtz-selector__legend {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  margin-top: var(--space-md);
+}
+
+.mtz-selector__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.mtz-selector__legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mtz-selector__legend-dot--available { background-color: var(--color-status-available); }
+.mtz-selector__legend-dot--sold      { background-color: var(--color-status-sold); }
+.mtz-selector__legend-dot--rented    { background-color: var(--color-status-rented); }
+
+/* Plan 2D al etajului */
+.mtz-selector__plan {
+  width: 100%;
+  max-width: 56rem;
+  padding: 0 var(--container-px);
+}
+
+.mtz-selector__plan-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+}
+
+.mtz-selector__back {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: var(--font-sans);
+  transition: color var(--transition-fast);
+}
+
+.mtz-selector__back:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.mtz-selector__plan-title {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+}
+
+/* Grid apartamente pe plan */
+.mtz-plan-grid {
+  display: grid;
+  gap: 3px;
+  width: 100%;
+}
+
+.mtz-plan-apt {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid transparent;
+  min-height: 5rem;
+  padding: var(--space-xs);
+  transition: filter var(--transition-fast), transform var(--transition-fast),
+              border-color var(--transition-fast);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.mtz-plan-apt:hover {
+  filter: brightness(1.15);
+  transform: scale(1.02);
+  z-index: 2;
+}
+
+/* Status culori */
+.mtz-plan-apt--available {
+  background: rgba(166, 144, 128, 0.25);
+  border-color: rgba(166, 144, 128, 0.5);
+}
+.mtz-plan-apt--sold {
+  background: rgba(67, 58, 53, 0.35);
+  border-color: rgba(67, 58, 53, 0.5);
+}
+.mtz-plan-apt--rented {
+  background: rgba(196, 176, 160, 0.2);
+  border-color: rgba(196, 176, 160, 0.4);
+}
+
+.mtz-plan-apt__label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.mtz-plan-apt__rooms {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Tooltip */
+.mtz-apt-tooltip {
+  position: fixed;
+  z-index: var(--z-modal);
+  pointer-events: none;
+  background: var(--color-dark);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  min-width: 180px;
+  box-shadow: var(--shadow-modal);
+  transform: translate(-50%, calc(-100% - 12px));
+  transition: opacity 0.1s ease;
+}
+
+.mtz-apt-tooltip__label {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+  color: var(--color-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.mtz-apt-tooltip__row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-bottom: 2px;
+}
+
+.mtz-apt-tooltip__key {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(249, 248, 246, 0.35);
+}
+
+.mtz-apt-tooltip__val {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: rgba(249, 248, 246, 0.75);
+}

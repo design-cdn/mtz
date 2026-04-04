@@ -1,0 +1,40 @@
+/* ── WHATSAPP STICKY ── */
+
+.mtz-wa-sticky {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: var(--z-sticky);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  background: #25d366;
+  border-radius: 50%;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  text-decoration: none;
+}
+
+.mtz-wa-sticky:hover {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 8px 28px rgba(37, 211, 102, 0.45);
+}
+
+.mtz-wa-sticky:active {
+  transform: scale(0.96);
+}
+
+/* Buton WA în coloana de sidebar contact — aliniat stânga cu textul */
+.mtz-btn-wa--contact {
+  display: flex;
+  align-items: center;
+  color: var(--color-secondary);
+  margin-top: var(--space-lg);
+  padding-left: 0;
+}
+
+.mtz-btn-wa--contact:hover {
+  color: var(--color-text-light);
+}

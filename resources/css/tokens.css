@@ -1,0 +1,97 @@
+/* ============================================================
+   MTZ NORD RESIDENCE — DESIGN TOKENS
+   Sursa unică de adevăr. Nu declara valori în altă parte.
+   ============================================================ */
+
+@theme {
+  /* ── Culori ── */
+  --color-primary:          #433a35;
+  --color-on-primary:       #f9f8f6;
+  --color-secondary:        #a69080;
+  --color-secondary-light:  #c4b0a0;
+  --color-background:       #fdfcfb;
+  --color-surface:          #f9f8f6;
+  --color-surface-variant:  #e5e3e1;
+  --color-dark:             #303334;
+  --color-outline:          #a69080;
+  --color-outline-variant:  #d1cfcd;
+  --color-text-primary:     #433a35;
+  --color-text-muted:       rgba(67, 58, 53, 0.55);
+  --color-text-dark:        rgba(249, 248, 246, 0.55);
+  --color-text-light:       #f9f8f6;
+
+  /* Status apartamente */
+  --color-status-available: #a69080;        /* secondary */
+  --color-status-sold:      #433a35;        /* primary */
+  --color-status-rented:    #c4b0a0;        /* secondary-light */
+
+  /* ── Font ── */
+  --font-sans: 'Manrope', system-ui, sans-serif;
+  --font-display: 'Manrope', system-ui, sans-serif;
+
+  /* ── Typographic scale ── */
+  --text-xs:      0.75rem;     /* 12px */
+  --text-sm:      0.875rem;    /* 14px */
+  --text-base:    1rem;        /* 16px */
+  --text-lg:      1.125rem;    /* 18px */
+  --text-xl:      1.25rem;     /* 20px */
+  --text-2xl:     1.5rem;      /* 24px */
+  --text-3xl:     2rem;        /* 32px */
+  --text-4xl:     clamp(2.5rem, 5vw, 4.5rem);
+  --text-5xl:     clamp(3rem, 6vw, 5rem);
+  --text-display: clamp(2.5rem, 6vw, 4.5rem);
+
+  /* ── Icon sizes (Material Symbols) ── */
+  /* Sizes covered by text scale: --text-base(16), --text-xl(20), --text-2xl(24), --text-3xl(32) */
+  --icon-lg:  2.25rem;  /* 36px — feature/section icons  */
+  --icon-xl:  2.5rem;   /* 40px — lightbox/large icons   */
+  --icon-2xl: 3rem;     /* 48px — display/empty state    */
+
+
+  /* ── Spacing scale ── */
+  --space-xs:   0.5rem;
+  --space-sm:   1rem;
+  --space-md:   1.5rem;
+  --space-lg:   2rem;
+  --space-xl:   3rem;
+  --space-2xl:  5rem;
+  --space-3xl:  8rem;
+  --space-section: 8rem;
+  --space-section-sm: 5rem;
+  --space-section-lg: 10rem;
+
+  /* ── Z-index ── */
+  --z-base:   0;
+  --z-sticky: 40;
+  --z-nav:    100;
+  --z-overlay: 150;
+  --z-modal:  200;
+
+  /* ── Layout ── */
+  --nav-h:          5rem;
+  --container-max:  1920px;
+  --container-px:   3rem;
+  --container-px-md: 6rem;
+
+  /* ── Border radius ── */
+  --radius-none: 0;
+  --radius-sm:   2px;
+  --radius-md:   4px;
+  --radius-lg:   8px;
+
+  /* ── Transitions ── */
+  --transition-fast: 0.2s ease;
+  --transition-med:  0.4s ease;
+  --transition-slow: 0.7s ease-out;
+
+  /* ── Letter spacing ── */
+  --ls-wide:    0.04em;
+  --ls-wider:   0.06em;
+  --ls-widest:  0.1em;
+  --ls-label:   0.25em;
+  --ls-label-xl: 0.35em;
+
+  /* ── Shadows ── */
+  --shadow-card: 0 4px 32px rgba(67, 58, 53, 0.08);
+  --shadow-modal: 0 24px 80px rgba(0, 0, 0, 0.4);
+}

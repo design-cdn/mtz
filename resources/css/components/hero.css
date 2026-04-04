@@ -1,0 +1,309 @@
+/* ── HERO ── */
+
+.mtz-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--color-dark);
+}
+
+.mtz-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.82);
+  transform: scale(1.04);
+  transition: transform 8s ease-out;
+  will-change: transform;
+}
+
+.mtz-hero__bg--loaded {
+  transform: scale(1);
+}
+
+.mtz-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(48, 51, 52, 0.65) 0%,
+    rgba(48, 51, 52, 0.2) 40%,
+    transparent 70%
+  );
+}
+
+/* Headline — bottom left, deasupra selectorului de etaje */
+.mtz-hero__headline {
+  position: absolute;
+  bottom: 11rem;   /* spațiu să nu se suprapună cu selectorul (label + butoane + padding) */
+  left: var(--container-px);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+@media (min-width: 768px) {
+  .mtz-hero__headline {
+    left: var(--container-px-md);
+  }
+}
+
+.mtz-hero__location {
+  display: block;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label-xl);
+  margin-bottom: 0.75rem;
+}
+
+.mtz-hero__title {
+  font-size: clamp(1.75rem, 3.5vw, 3.25rem);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.mtz-hero__title em {
+  font-style: normal;
+  opacity: 0.6;
+}
+
+/* Scroll indicator — bottom right */
+.mtz-hero__scroll {
+  position: absolute;
+  bottom: 2.5rem;
+  right: var(--container-px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .mtz-hero__scroll {
+    right: var(--container-px-md);
+  }
+}
+
+.mtz-hero__scroll-line {
+  position: relative;
+  overflow: hidden;
+  height: 2.5rem;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.mtz-hero__scroll-text {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label-xl);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* ── GALERIE ── */
+
+.mtz-img-wrap {
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+
+.mtz-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+  display: block;
+}
+
+.mtz-img-wrap:hover .mtz-img {
+  transform: scale(1.04);
+}
+
+/* Card suprapus în galerie */
+.mtz-gallery-card {
+  background-color: var(--color-background);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-sm);
+}
+
+/* Badge status apartament */
+.mtz-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.875rem;
+  background: rgba(166, 144, 128, 0.1);
+  border: 1px solid rgba(166, 144, 128, 0.25);
+  border-radius: 999px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
+  color: var(--color-secondary);
+}
+
+.mtz-badge__dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-secondary);
+  animation: mtz-pulse 2s infinite;
+}
+
+/* ── MAP SECTION ── */
+
+.mtz-map-section {
+  position: relative;
+  height: 720px;
+  overflow: hidden;
+}
+
+.mtz-map-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-base);
+}
+
+/* Fade sus — blendare cu secțiunea anterioară */
+.mtz-map-fade-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-surface) 0%,
+    rgba(249, 248, 246, 0.7) 50%,
+    transparent 100%
+  );
+  z-index: var(--z-sticky);
+  pointer-events: none;
+}
+
+/* Fade jos — blendare cu secțiunea CTA dark */
+.mtz-map-fade-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: linear-gradient(
+    to top,
+    var(--color-background) 0%,
+    transparent 100%
+  );
+  z-index: var(--z-sticky);
+  pointer-events: none;
+}
+
+/* Card localizare — dreapta, sus, fără imagine */
+.mtz-map-card {
+  position: absolute;
+  top: calc(var(--nav-h) + var(--space-xl));
+  right: var(--container-px);
+  width: 320px;
+  z-index: var(--z-nav);
+  background-color: var(--color-background);
+  box-shadow: var(--shadow-modal);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .mtz-map-card {
+    right: var(--container-px-md);
+    width: 340px;
+  }
+}
+
+.mtz-map-card__body {
+  padding: var(--space-md) var(--space-lg) var(--space-lg);
+}
+
+.mtz-map-card__title {
+  font-size: var(--text-2xl);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-sm);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--color-outline-variant);
+  line-height: 1.15;
+}
+
+.mtz-map-card__poi {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+}
+
+.mtz-map-card__poi-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: 2px 0;
+}
+
+.mtz-map-card__poi-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+  color: var(--color-text-muted);
+}
+
+.mtz-map-card__poi-icon {
+  color: var(--color-secondary);
+  font-size: var(--text-base);
+  flex-shrink: 0;
+}
+
+.mtz-map-card__poi-dist {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: var(--ls-label);
+  white-space: nowrap;
+}
+
+/* Titlu secțiune overlay pe hartă — stânga-sus, deasupra fade-ului */
+.mtz-map-title {
+  position: absolute;
+  top: calc(var(--nav-h) + var(--space-lg));
+  left: var(--container-px);
+  z-index: var(--z-nav);
+}
+
+@media (min-width: 768px) {
+  .mtz-map-title {
+    left: var(--container-px-md);
+  }
+}
+
+/* Custom Leaflet Pin */
+.mtz-leaflet-pin {
+  background: none;
+  border: none;
+}
