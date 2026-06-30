@@ -61,6 +61,25 @@
   color: var(--color-secondary);
 }
 
+/* Banner ANPC SAL — cerință legală */
+.mtz-footer__anpc {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  border-radius: var(--radius-sm);
+  transition: opacity var(--transition-fast);
+}
+
+.mtz-footer__anpc img {
+  height: 38px;
+  width: auto;
+  display: block;
+}
+
+.mtz-footer__anpc:hover {
+  opacity: 0.85;
+}
+
 /* Iconițe Social Media */
 .mtz-social-link {
   display: inline-flex;

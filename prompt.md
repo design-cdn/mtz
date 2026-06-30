@@ -2,7 +2,7 @@
 
 ## Proiect
 
-Site de prezentare pentru **MTZ Nord Residence**, un ansamblu rezidențial în Mangalia, România. Scopul site-ului este conversia vizitatorilor în lead-uri — fiecare decizie de design și interactivitate servește acest scop.
+Site de prezentare pentru **MTZ Nord Residence**, un ansamblu rezidențial în Medgidia, județul Constanța, România. Scopul site-ului este conversia vizitatorilor în lead-uri — fiecare decizie de design și interactivitate servește acest scop.
 
 ---
 
@@ -33,7 +33,7 @@ Pagină single-scroll cu următoarele secțiuni în ordine:
 3. **Cifre cheie** — statistici animate la scroll (etaje, tipuri camere, an finalizare etc.)
 4. **Galerie** — layout editorial asimetric cu imaginile proiectului
 5. **Ce primești** — grid de features/dotări ale ansamblului
-6. **Localizare** — Google Maps embed + card cu puncte de interes din Mangalia
+6. **Localizare** — Google Maps embed + card cu puncte de interes din Medgidia
 7. **CTA** — secțiune dark cu call to action spre WhatsApp
 8. **Contact** — formular complet (vezi secțiunea Formular)
 

@@ -1,0 +1,131 @@
+/* ============================================================
+   MTZ NORD RESIDENCE — Pagini legale (confidențialitate / GDPR)
+   Coloană unică, lizibilă, proză cu titluri + liste.
+   ============================================================ */
+
+.mtz-legal {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-px);
+  padding-right: var(--container-px);
+}
+
+@media (min-width: 768px) {
+  .mtz-legal {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+}
+
+.mtz-legal__updated {
+  margin-top: var(--space-md);
+}
+
+/* ── Notă placeholder (de completat de dezvoltator) ── */
+.mtz-legal-note {
+  margin-top: var(--space-lg);
+  padding: var(--space-md);
+  border: 1px dashed var(--color-outline);
+  border-radius: var(--radius-md);
+  background: var(--color-background);
+}
+
+.mtz-legal-note p {
+  font-size: var(--text-sm);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* ── Token placeholder vizibil ── */
+.mtz-legal-ph {
+  background: rgba(198, 45, 31, 0.08);
+  border-bottom: 1px dashed rgba(198, 45, 31, 0.55);
+  color: #9a2b1f;
+  font-weight: 600;
+  padding: 0 0.3rem;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+/* ── Proză ── */
+.mtz-legal-prose {
+  margin-top: var(--space-xl);
+}
+
+.mtz-legal-prose h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-sm);
+}
+
+.mtz-legal-prose h2:first-child {
+  margin-top: 0;
+}
+
+.mtz-legal-prose h3 {
+  font-size: var(--text-base);
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-xs);
+}
+
+.mtz-legal-prose p {
+  font-size: var(--text-base);
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.mtz-legal-prose ul {
+  list-style: none;
+  margin: 0 0 var(--space-md);
+  padding: 0;
+}
+
+.mtz-legal-prose li {
+  position: relative;
+  padding-left: 1.4rem;
+  margin-bottom: 0.5rem;
+  font-size: var(--text-base);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+.mtz-legal-prose li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.75em;
+  width: 7px;
+  height: 1px;
+  background: var(--color-secondary);
+}
+
+.mtz-legal-prose a {
+  color: var(--color-secondary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--transition-fast);
+}
+
+.mtz-legal-prose a:hover {
+  color: var(--color-primary);
+}
+
+.mtz-legal-prose strong {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}

@@ -50,17 +50,22 @@
         <p class="mtz-selector__label">{{ __('hero.select_floor') }}</p>
         <div class="mtz-selector__facade">
           <div class="mtz-selector__floors">
-            <template x-for="floor in floorsReversed" :key="floor.number">
-              <button
-                type="button"
+            <template x-for="floor in floors" :key="floor.number">
+              <a
+                :href="floor.url"
                 class="mtz-selector__floor"
-                :class="{ 'mtz-selector__floor--active': selectedFloor === floor.number }"
-                @click="selectFloor(floor.number)"
-                :aria-label="`Selectează etajul ${floor.number}`"
+                :class="{ 'mtz-selector__floor--pending': floor.pending }"
+                @click="floor.pending && $event.preventDefault()"
+                :tabindex="floor.pending ? '-1' : '0'"
+                :aria-disabled="floor.pending ? 'true' : 'false'"
+                :aria-label="floor.pending ? `${floor.label} — în curs de repartajare` : `Vezi ${floor.label}`"
               >
                 <span class="mtz-selector__floor-label" x-text="floor.label"></span>
-                <span class="mtz-selector__floor-count" x-text="`${floor.apartments.length} ap.`"></span>
-              </button>
+                <span
+                  class="mtz-selector__floor-count"
+                  x-text="floor.pending ? 'în curs de repartajare' : `${floor.apartments.length} ap.`"
+                ></span>
+              </a>
             </template>
           </div>
         </div>
@@ -86,7 +91,7 @@
               <span class="material-symbols-outlined mtz-icon-base">arrow_back</span>
               {{ __('hero.back') }}
             </button>
-            <span class="mtz-selector__plan-title" x-text="`{{ __('hero.plan_title', ['number' => '']) }}` + selectedFloor"></span>
+            <span class="mtz-selector__plan-title" x-text="`Plan ` + currentFloorLabel"></span>
           </div>
 
           {{-- Grid apartamente --}}
@@ -104,7 +109,7 @@
                 :aria-label="`Apartament ${apt.label} — ${getStatusLabel(apt.status)}`"
               >
                 <span class="mtz-plan-apt__label" x-text="apt.label"></span>
-                <span class="mtz-plan-apt__rooms" x-text="`${apt.rooms} cam · ${apt.area} m²`"></span>
+                <span class="mtz-plan-apt__rooms" x-text="apt.area ? `${apt.rooms} cam · ${apt.area} m²` : `${apt.rooms} camere`"></span>
               </a>
             </template>
           </div>
@@ -132,11 +137,7 @@
       </div>
       <div class="mtz-apt-tooltip__row">
         <span class="mtz-apt-tooltip__key">Suprafață</span>
-        <span class="mtz-apt-tooltip__val" x-text="tooltip.area + ' m²'"></span>
-      </div>
-      <div class="mtz-apt-tooltip__row">
-        <span class="mtz-apt-tooltip__key">Orientare</span>
-        <span class="mtz-apt-tooltip__val" x-text="tooltip.orientation"></span>
+        <span class="mtz-apt-tooltip__val" x-text="tooltip.area ? tooltip.area + ' m²' : 'La cerere'"></span>
       </div>
       <div class="mtz-apt-tooltip__row" style="margin-top:4px;">
         <span class="mtz-apt-tooltip__key">Status</span>
@@ -166,8 +167,8 @@
           <hr class="mtz-divider"/>
         </div>
         <div class="md:col-span-5 md:col-start-7 flex flex-col gap-6" data-animate="fade-up">
-          <p class="mtz-body-lg">MTZ Nord Residence este un ansamblu rezidențial nou construit în Mangalia, la câțiva pași de mare. Cinci etaje, apartamente cu una până la patru camere, materiale de calitate și spații gândite să fie cu adevărat locuibile — nu doar frumoase în randări.</p>
-          <p class="mtz-body-lg">Mangalia rămâne una dintre puținele zone de pe litoral unde liniștea nu e un lux. Fără aglomerație de sezon, fără zgomot. Un loc în care poți veni în weekend, în vacanță sau să te stabilești definitiv.</p>
+          <p class="mtz-body-lg">MTZ Nord Residence este un ansamblu rezidențial nou construit în Medgidia, al doilea oraș ca mărime din județul Constanța. Cinci etaje, apartamente cu una până la patru camere, materiale de calitate și spații gândite să fie cu adevărat locuibile — nu doar frumoase în randări.</p>
+          <p class="mtz-body-lg">Medgidia îți dă liniștea unui oraș la scară umană, fără izolare: ești pe A2 și pe magistrala feroviară, cu Constanța la 40 de minute și litoralul la mai puțin de o oră. Un loc în care poți să te stabilești fără compromisuri.</p>
         </div>
       </div>
     </div>
@@ -237,7 +238,7 @@
           <div class="mtz-img-wrap aspect-[3/4] mb-6">
             <img
               class="mtz-img"
-              src="{{ asset('images/hero.jpg') }}"
+              src="{{ asset('images/interior.jpg') }}"
               alt="MTZ Nord Residence — interior"
               loading="lazy"
             />
@@ -264,7 +265,7 @@
           <div class="mtz-img-wrap aspect-[4/5] shadow-xl">
             <img
               class="mtz-img"
-              src="{{ asset('images/hero.jpg') }}"
+              src="{{ asset('images/interior-2.jpg') }}"
               alt="MTZ Nord Residence — interior"
               loading="lazy"
             />
@@ -344,15 +345,16 @@ function floorSelector(floors) {
     selectedFloor: null,
     tooltip: { visible: false, x: 0, y: 0, label: '', rooms: 0, area: 0, orientation: '', status: '' },
 
-    // Etajele în ordine descrescătoare pentru display (5 → 1)
-    get floorsReversed() {
-      return [...this.floors].reverse();
-    },
-
     get currentFloorApartments() {
-      if (!this.selectedFloor) return [];
+      if (this.selectedFloor === null) return [];
       const fl = this.floors.find(f => f.number === this.selectedFloor);
       return fl ? fl.apartments : [];
+    },
+
+    get currentFloorLabel() {
+      if (this.selectedFloor === null) return '';
+      const fl = this.floors.find(f => f.number === this.selectedFloor);
+      return fl ? fl.label : '';
     },
 
     selectFloor(floorNumber) {
@@ -407,7 +409,6 @@ function floorSelector(floors) {
         label: `Ap. ${apt.label}`,
         rooms: apt.rooms,
         area: apt.area,
-        orientation: apt.orientation,
         status: apt.status,
       };
     },

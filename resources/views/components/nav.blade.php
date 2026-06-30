@@ -33,7 +33,8 @@
          class="mtz-nav__link {{ $activeRoute === 'home'    ? 'mtz-nav__link--active' : '' }}"
       >{{ __('nav.home') }}</a>
 
-      <a href="{{ route('home') }}#apartamente" class="mtz-nav__link"
+      <a href="{{ route('apartamente.index') }}"
+         class="mtz-nav__link {{ $activeRoute === 'apartments' ? 'mtz-nav__link--active' : '' }}"
       >{{ __('nav.apartments') }}</a>
 
       <a href="{{ route('home') }}#proiect" class="mtz-nav__link"

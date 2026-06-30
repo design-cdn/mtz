@@ -59,9 +59,9 @@
   const mapEl  = document.getElementById(mapId);
   if (!mapEl || typeof L === 'undefined') return;
 
-  // Coordonate MTZ Nord Residence, Mangalia
-  const LAT  = 43.8134;
-  const LNG  = 28.5831;
+  // Coordonate MTZ Nord Residence, Medgidia
+  const LAT  = 44.2486;
+  const LNG  = 28.2787;
   const ZOOM = 14;
 
   const map = L.map(mapId, {

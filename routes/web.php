@@ -16,6 +16,8 @@ use App\Http\Controllers\ContactController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Apartamente
+Route::get('/apartamente', [ApartamentController::class, 'index'])->name('apartamente.index');
+Route::get('/etaj/{floor}', [ApartamentController::class, 'floor'])->name('etaj.show');
 Route::get('/apartamente/{slug}', [ApartamentController::class, 'show'])->name('apartament.show');
 
 // Progres șantier
@@ -25,3 +27,7 @@ Route::get('/progres', [ProgresController::class, 'index'])->name('progres.index
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 Route::post('/oferta', [ContactController::class, 'oferta'])->name('contact.oferta');
+
+// Pagini legale
+Route::view('/confidentialitate', 'legal.confidentialitate')->name('legal.confidentialitate');
+Route::view('/gdpr', 'legal.gdpr')->name('legal.gdpr');

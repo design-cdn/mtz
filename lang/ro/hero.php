@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'location'    => 'Mangalia · Constanța',
-    'title_line1' => 'Locul tău la mare,',
-    'title_line2' => 'departe de aglomerație.',
+    'location'    => 'Medgidia · Constanța',
+    'title_line1' => 'Acasă,',
+    'title_line2' => 'aproape de tot.',
     'select_floor' => 'Selectează etajul dorit',
     'scroll'       => 'Scroll',
     'legend' => [

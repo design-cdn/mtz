@@ -23,3 +23,13 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Claude Code (local tooling/config)
+/.claude/
+
+# Materiale sursă originale — NEfolosite de site (randări/planuri brute).
+# Imaginile efectiv folosite trăiesc în public/images/ și public/etaje_svg/.
+/Planuri MTZ/
+/etaje-1-2-3/
+/parter/
+/public/images/renderings/

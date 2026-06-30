@@ -1,14 +1,24 @@
 @extends('layouts.app')
 
+@php
+    $floorLabel = $apartment['floor'] === 0 ? 'Parter' : 'Etaj ' . $apartment['floor'];
+    $areaText   = $apartment['area'] ? $apartment['area'] . ' m²' : 'La cerere';
+
+    // Slide-urile lightbox-ului: planul 3D + planul 2D vectorial (când e disponibil).
+    // Pentru 2D, adaugă 'plan_2d' => 'images/...' la apartamentul din config/apartments.php.
+    $slides = [['src' => asset($apartment['image'] ?? 'images/hero.jpg'), 'caption' => 'Plan 3D', 'sheet' => false]];
+    if (! empty($apartment['plan_2d'])) {
+        $slides[] = ['src' => asset($apartment['plan_2d']), 'caption' => 'Plan 2D', 'sheet' => true];
+    }
+@endphp
+
 @section('title', __('meta.apartment.title', [
     'rooms' => $apartment['rooms'],
-    'floor' => $apartment['floor'],
+    'floor' => $floorLabel,
 ]))
 @section('description', __('meta.apartment.description', [
-    'rooms'       => $apartment['rooms'],
-    'area'        => $apartment['area'],
-    'floor'       => $apartment['floor'],
-    'orientation' => $apartment['orientation'],
+    'rooms' => $apartment['rooms'],
+    'floor' => $floorLabel,
 ]))
 
 @php
@@ -24,9 +34,9 @@
     <nav aria-label="Breadcrumb" class="flex items-center gap-3">
       <a href="{{ route('home') }}" class="mtz-caption" style="color:var(--color-text-primary);opacity:0.4;text-decoration:none;">Acasă</a>
       <span class="mtz-caption" style="opacity:0.3;">·</span>
-      <a href="{{ route('home') }}#apartamente" class="mtz-caption" style="color:var(--color-text-primary);opacity:0.4;text-decoration:none;">Apartamente</a>
+      <a href="{{ route('apartamente.index') }}" class="mtz-caption" style="color:var(--color-text-primary);opacity:0.4;text-decoration:none;">Apartamente</a>
       <span class="mtz-caption" style="opacity:0.3;">·</span>
-      <span class="mtz-caption" style="opacity:0.7;">Ap. {{ $apartment['label'] }} · Etaj {{ $apartment['floor'] }}</span>
+      <span class="mtz-caption" style="opacity:0.7;">Ap. {{ $apartment['label'] }} · {{ $floorLabel }}</span>
     </nav>
   </div>
 
@@ -40,34 +50,69 @@
           <span class="mtz-badge__dot" style="background-color:var(--color-status-{{ $apartment['status'] }});"></span>
           {{ __('hero.status.' . $apartment['status']) }}
         </span>
-        <span class="mtz-caption">{{ $building['name'] }} · {{ $building['location'] }}</span>
       </div>
       <h1 class="mtz-h1">
         Apartament {{ $apartment['rooms'] }} {{ $apartment['rooms'] === 1 ? 'cameră' : 'camere' }}<br/>
-        Etaj {{ $apartment['floor'] }} · Orientare {{ $apartment['orientation'] }}
+        {{ $floorLabel }}
       </h1>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
 
-      {{-- Stânga: imagini + plan 2D --}}
-      <div class="lg:col-span-8">
-        <div class="mtz-img-wrap" style="margin-bottom:1rem;max-height:520px;overflow:hidden;">
+      {{-- Stânga: plan 3D (click → lightbox cu plan 2D vectorial) --}}
+      <div class="lg:col-span-8" x-data="aptGallery(@js($slides))">
+        <button
+          type="button"
+          class="mtz-img-wrap mtz-img-wrap--clickable mtz-apt-figure"
+          @click="show(0)"
+          aria-label="Mărește planul apartamentului"
+        >
           <img
-            class="mtz-img"
-            src="{{ asset('images/hero.jpg') }}"
-            alt="MTZ Nord Residence — Ap. {{ $apartment['label'] }}"
-            loading="lazy"
-            style="max-height:520px;"
+            class="mtz-apt-figure__img"
+            src="{{ asset($apartment['image'] ?? 'images/hero.jpg') }}"
+            alt="Plan apartament — MTZ Nord Residence, Ap. {{ $apartment['label'] }}"
           />
-        </div>
+          <div class="mtz-img-overlay">
+            <span class="material-symbols-outlined mtz-img-overlay__icon">zoom_in</span>
+          </div>
+          <div class="mtz-img-badge">
+            <span class="material-symbols-outlined">open_in_full</span>
+            Mărește
+          </div>
+        </button>
 
-        {{-- Plan 2D placeholder — Phase 2: SVG/PDF al apartamentului --}}
-        <div class="mtz-placeholder" style="min-height:18rem;">
-          <span class="material-symbols-outlined mtz-icon-3xl" style="color:var(--color-secondary);margin-bottom:1rem;">architecture</span>
-          <span class="mtz-label" style="margin-bottom:0.5rem;">Plan 2D</span>
-          <p class="mtz-body-sm" style="max-width:18rem;text-align:center;">Planul vectorial al apartamentului va fi disponibil după finalizarea documentației tehnice.</p>
-        </div>
+        {{-- Lightbox — teleportat pe body ca să scape de stacking context --}}
+        <template x-teleport="body">
+          <div
+            class="mtz-lightbox"
+            x-show="open"
+            x-cloak
+            @keydown.window="onKey($event)"
+            role="dialog"
+            aria-modal="true"
+          >
+            <div class="mtz-lightbox__bg" @click="close()"></div>
+
+            <div class="mtz-lb__counter" x-show="multi" x-text="(i + 1) + ' / ' + slides.length"></div>
+
+            <button class="mtz-lb__close" @click="close()" aria-label="Închide">
+              <span class="material-symbols-outlined">close</span>
+            </button>
+
+            <button class="mtz-lb__nav mtz-lb__nav--prev" x-show="multi" @click="prev()" aria-label="Imaginea anterioară">
+              <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <button class="mtz-lb__nav mtz-lb__nav--next" x-show="multi" @click="next()" aria-label="Imaginea următoare">
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+
+            <div class="mtz-lb__inner" @touchstart.passive="touchStart($event)" @touchend="touchEnd($event)">
+              <template x-for="(s, idx) in slides" :key="idx">
+                <img class="mtz-lb__img" :class="{ 'mtz-lb__img--sheet': s.sheet }" :src="s.src" :alt="s.caption" x-show="i === idx" draggable="false"/>
+              </template>
+            </div>
+          </div>
+        </template>
       </div>
 
       {{-- Dreapta: date + CTA --}}
@@ -81,11 +126,11 @@
           </div>
           <div>
             <span class="mtz-label">Suprafață utilă</span>
-            <p class="mtz-stat" style="font-size:var(--text-3xl);">{{ $apartment['area'] }} m²</p>
+            <p class="mtz-stat" style="font-size:var(--text-3xl);">{{ $areaText }}</p>
           </div>
           <div>
             <span class="mtz-label">Etaj</span>
-            <p class="mtz-stat" style="font-size:var(--text-3xl);">{{ $apartment['floor'] }} din {{ $building['floors_total'] }}</p>
+            <p class="mtz-stat" style="font-size:var(--text-3xl);">{{ $apartment['floor'] === 0 ? 'Parter' : $apartment['floor'] }}</p>
           </div>
           <div>
             <span class="mtz-label">Preț</span>
@@ -95,16 +140,15 @@
 
         {{-- Detalii secundare --}}
         <div class="flex flex-col gap-4" style="padding-bottom:2rem;border-bottom:1px solid var(--color-outline-variant);">
+          @php
+            $hasBalcony = array_key_exists('balcony', $apartment)
+                ? $apartment['balcony']
+                : ! empty($apartment['balcony_area']);
+          @endphp
           <div class="mtz-detail-row">
-            <span class="mtz-caption">Orientare</span>
-            <span class="mtz-body-sm" style="color:var(--color-text-primary);">{{ $apartment['orientation'] }}</span>
+            <span class="mtz-caption">Balcon</span>
+            <span class="mtz-body-sm" style="color:var(--color-text-primary);">{{ $hasBalcony ? 'Da' : 'Nu' }}</span>
           </div>
-          @if($apartment['balcony_area'])
-            <div class="mtz-detail-row">
-              <span class="mtz-caption">Balcon</span>
-              <span class="mtz-body-sm" style="color:var(--color-text-primary);">Da · {{ $apartment['balcony_area'] }} m²</span>
-            </div>
-          @endif
           <div class="mtz-detail-row">
             <span class="mtz-caption">Loc parcare</span>
             <span class="mtz-body-sm" style="color:var(--color-text-primary);">Inclus</span>
@@ -122,7 +166,7 @@
         {{-- CTA --}}
         <button
           class="mtz-btn mtz-btn-primary"
-          style="width:100%;padding:1.25rem 2rem;"
+          style="width:100%;padding:1.25rem 2rem;white-space:normal;line-height:1.5;"
           @click.prevent="$dispatch('open-modal')"
           x-data
         >
@@ -181,22 +225,15 @@
   {{-- ═══ FORMULAR OFERTĂ ═══ --}}
   <section id="oferta" class="mtz-section-dark">
     <div class="mtz-container" style="padding-top:var(--space-2xl);padding-bottom:var(--space-lg);border-bottom:1px solid rgba(255,255,255,0.08);">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        <div>
-          <span class="mtz-label-dark">Apartament</span>
-          <p class="mtz-body-dark" style="font-size:var(--text-base);">
-            {{ $apartment['rooms'] }} {{ $apartment['rooms'] === 1 ? 'cameră' : 'camere' }} · Etaj {{ $apartment['floor'] }} · {{ $apartment['area'] }} m²<br/>
-            {{ $building['name'] }}, {{ $building['location'] }}
-          </p>
-        </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div>
           <span class="mtz-label-dark">Contact direct</span>
-          <p class="mtz-body-dark" style="font-size:var(--text-base);">{{ $building['phone'] }}</p>
-          <p class="mtz-body-dark" style="font-size:var(--text-base);">{{ $building['email'] }}</p>
+          <p class="mtz-body-dark" style="font-size:var(--text-3xl);line-height:1.35;color:rgba(249,248,246,0.92);overflow-wrap:anywhere;">{{ $building['phone'] }}</p>
+          <p class="mtz-body-dark" style="font-size:var(--text-3xl);line-height:1.35;color:rgba(249,248,246,0.92);overflow-wrap:anywhere;">{{ $building['email'] }}</p>
         </div>
         <div>
           <span class="mtz-label-dark">Program</span>
-          <p class="mtz-body-dark" style="font-size:var(--text-base);">Lun–Vin: 9:00–18:00<br/>Sâmbătă: 10:00–14:00</p>
+          <p class="mtz-body-dark" style="font-size:var(--text-3xl);line-height:1.35;color:rgba(249,248,246,0.92);">Lun–Vin: 9:00–18:00<br/>Sâmbătă: 10:00–14:00</p>
         </div>
       </div>
     </div>
@@ -228,3 +265,45 @@
 </div>
 
 @endsection
+
+@push('scripts')
+<script>
+  function aptGallery(slides) {
+    return {
+      slides,
+      open: false,
+      i: 0,
+      _touchX: null,
+
+      get multi() { return this.slides.length > 1; },
+
+      show(idx) {
+        this.i = idx || 0;
+        this.open = true;
+        document.documentElement.style.overflow = 'hidden';
+      },
+      close() {
+        this.open = false;
+        document.documentElement.style.overflow = '';
+      },
+      next() { if (this.multi) this.i = (this.i + 1) % this.slides.length; },
+      prev() { if (this.multi) this.i = (this.i - 1 + this.slides.length) % this.slides.length; },
+
+      onKey(e) {
+        if (!this.open) return;
+        if (e.key === 'Escape') this.close();
+        else if (e.key === 'ArrowRight') this.next();
+        else if (e.key === 'ArrowLeft') this.prev();
+      },
+
+      touchStart(e) { this._touchX = e.changedTouches[0].clientX; },
+      touchEnd(e) {
+        if (this._touchX === null) return;
+        const dx = e.changedTouches[0].clientX - this._touchX;
+        if (Math.abs(dx) > 40) { dx < 0 ? this.next() : this.prev(); }
+        this._touchX = null;
+      },
+    };
+  }
+</script>
+@endpush

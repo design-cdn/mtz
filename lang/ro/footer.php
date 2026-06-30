@@ -2,7 +2,7 @@
 
 return [
     'logo'    => 'MTZ Nord Residence',
-    'tagline' => 'Apartamente în Mangalia. La mare, fără aglomerație.',
+    'tagline' => 'Apartamente noi în Medgidia. Liniște, aproape de tot.',
     'copy'    => '© ' . date('Y') . ' MTZ Nord Residence. Toate drepturile rezervate.',
     'facebook'  => 'Facebook',
     'instagram' => 'Instagram',

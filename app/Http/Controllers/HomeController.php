@@ -13,29 +13,34 @@ class HomeController extends Controller
         $apartments = collect(config('apartments.apartments'));
         $poi        = config('apartments.poi');
 
-        // Grupare apartamente pe etaje pentru selectorul Alpine.js
-        $floorData = collect($floors)->map(function ($floor, $num) use ($apartments) {
-            $floorApts = $apartments
-                ->where('floor', $num)
-                ->values()
-                ->map(fn ($a) => [
-                    'id'          => $a['id'],
-                    'slug'        => $a['slug'],
-                    'label'       => $a['label'],
-                    'floor'       => $a['floor'],
-                    'rooms'       => $a['rooms'],
-                    'area'        => $a['area'],
-                    'orientation' => $a['orientation'],
-                    'status'      => $a['status'],
-                    'url'         => route('apartament.show', $a['slug']),
-                ]);
+        // Grupare apartamente pe etaje pentru selectorul Alpine.js.
+        // Toate nivelurile sunt afișate. Etajele dezactivate (4–5) apar marcate
+        // "în curs de repartajare", nu pot fi selectate și nu au apartamente.
+        $floorData = collect($floors)
+            ->map(function ($floor, $num) use ($apartments) {
+                $floorApts = $apartments
+                    ->where('floor', $num)
+                    ->values()
+                    ->map(fn ($a) => [
+                        'id'     => $a['id'],
+                        'slug'   => $a['slug'],
+                        'label'  => $a['label'],
+                        'floor'  => $a['floor'],
+                        'rooms'  => $a['rooms'],
+                        'area'   => $a['area'],
+                        'status' => $a['status'],
+                        'url'    => route('apartament.show', $a['slug']),
+                    ]);
 
-            return [
-                'number'     => $num,
-                'label'      => $floor['label'],
-                'apartments' => $floorApts,
-            ];
-        })->values();
+                return [
+                    'number'     => $num,
+                    'label'      => $floor['label'],
+                    'pending'    => ! $floor['enabled'],
+                    'url'        => $floor['enabled'] ? route('etaj.show', $num === 0 ? 'parter' : (string) $num) : null,
+                    'apartments' => $floorApts,
+                ];
+            })
+            ->values();
 
         // Statistici globale pentru secțiunea cifre cheie
         $stats = [

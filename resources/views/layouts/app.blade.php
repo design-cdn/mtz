@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=optional" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" rel="stylesheet"/>
 
   {{-- CSS via Vite --}}
   @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -72,7 +72,7 @@
         <span class="mtz-nav__mobile-arrow" aria-hidden="true">↗</span>
       </a>
 
-      <a href="{{ route('home') }}#apartamente"
+      <a href="{{ route('apartamente.index') }}"
          class="mtz-nav__mobile-item"
          @click="$store.nav.close()">
         <span class="mtz-nav__mobile-num">02</span>

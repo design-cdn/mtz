@@ -29,12 +29,16 @@
 
     {{-- Câmp readonly apartament (dacă e specificat) --}}
     @if($apartment)
+      @php
+        $aptFloor = $apartment['floor'] === 0 ? 'Parter' : 'Etaj ' . $apartment['floor'];
+        $aptArea  = $apartment['area'] ? ' · ' . $apartment['area'] . ' m²' : '';
+      @endphp
       <div class="mtz-field mtz-field--readonly">
         <label>{{ __('contact.field_apartment') }}</label>
         <input
           type="text"
           name="apartament"
-          value="{{ $apartment['label'] }} · Etaj {{ $apartment['floor'] }} · {{ $apartment['area'] }} m² · {{ config('apartments.building.name') }}"
+          value="Ap. {{ $apartment['label'] }} · {{ $aptFloor }}{{ $aptArea }} · {{ config('apartments.building.name') }}"
           readonly
         />
       </div>

@@ -40,9 +40,16 @@
 /* Headline — bottom left, deasupra selectorului de etaje */
 .mtz-hero__headline {
   position: absolute;
-  bottom: 11rem;   /* spațiu să nu se suprapună cu selectorul (label + butoane + padding) */
+  bottom: 13.5rem;   /* spațiu mai mare între titlu și selector (label + butoane + padding) */
   left: var(--container-px);
   color: rgba(255, 255, 255, 0.9);
+}
+
+/* Mobil: selectorul are 2 rânduri (6 etaje) → ridică headline-ul ca să nu se suprapună */
+@media (max-width: 640px) {
+  .mtz-hero__headline {
+    bottom: 17rem;
+  }
 }
 
 @media (min-width: 768px) {

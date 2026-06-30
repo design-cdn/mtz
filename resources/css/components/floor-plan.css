@@ -1,0 +1,213 @@
+/* ============================================================
+   MTZ NORD RESIDENCE — Pagină etaj (plan interactiv SVG)
+   ============================================================ */
+
+/* ── Containerul planului — fără card, planul respiră pe fundalul paginii ── */
+.mtz-floorplan {
+  margin: 0 auto;
+}
+
+/* Dimensionat pe înălțime (plan portret) → apartamente mai mari, fără margini
+   laterale goale. Lățimea urmează automat raportul de aspect. */
+.mtz-floorplan svg {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 86vh;
+  margin-inline: auto;
+}
+
+/* ── Apartament interactiv (grup #ap-N din SVG) ── */
+.mtz-fp-apt {
+  cursor: pointer;
+  outline: none;
+}
+
+/* Silueta apartamentului (cls-10) — singura formă pe care o colorăm.
+   Culoare distinctă per status. Disponibil e ascuns până la hover;
+   rezervat și vândut sunt colorate permanent. */
+.mtz-fp-apt .mtz-fp-shape {
+  transition: fill var(--transition-fast), fill-opacity var(--transition-fast);
+}
+
+.mtz-fp-apt.is-available .mtz-fp-shape { fill: var(--color-status-available); fill-opacity: 0; }
+.mtz-fp-apt.is-reserved  .mtz-fp-shape { fill: var(--color-status-reserved);  fill-opacity: 0.62; }
+.mtz-fp-apt.is-sold      .mtz-fp-shape { fill: var(--color-status-sold);      fill-opacity: 0.62; }
+.mtz-fp-apt.is-remodel   .mtz-fp-shape { fill: var(--color-status-remodel);   fill-opacity: 0.62; }
+
+/* Hover / highlight din listă → intensifică culoarea propriului status */
+.mtz-fp-apt:hover .mtz-fp-shape,
+.mtz-fp-apt.is-hover .mtz-fp-shape,
+.mtz-fp-apt:focus-visible .mtz-fp-shape { fill-opacity: 0.78; }
+
+.mtz-fp-apt.is-available:hover .mtz-fp-shape,
+.mtz-fp-apt.is-available.is-hover .mtz-fp-shape,
+.mtz-fp-apt.is-available:focus-visible .mtz-fp-shape { fill-opacity: 0.5; }
+
+/* Recompartimentare: greyed permanent, neinteractiv (fără reacție la hover) */
+.mtz-fp-apt.is-remodel { cursor: not-allowed; }
+.mtz-fp-apt.is-remodel:hover .mtz-fp-shape { fill-opacity: 0.62; }
+
+/* ── Etichete pe plan (nr. + m² / status) ── */
+.mtz-fp-label {
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+  font-family: var(--font-sans);
+  fill: #fff;
+}
+
+.mtz-fp-label__num { font-size: 46px; font-weight: 800; }
+.mtz-fp-label__sub {
+  font-size: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  fill: rgba(255, 255, 255, 0.85);
+}
+
+/* Container accent în spatele etichetei (rect generat în JS) */
+.mtz-fp-label-bg {
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+  fill: var(--color-primary);
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 2px;
+}
+
+/* Apar la hover / highlight, sau permanent pentru rezervat/vândut */
+.mtz-fp-apt:hover .mtz-fp-label,
+.mtz-fp-apt.is-hover .mtz-fp-label,
+.mtz-fp-apt:focus-visible .mtz-fp-label,
+.mtz-fp-apt.is-reserved .mtz-fp-label,
+.mtz-fp-apt.is-sold .mtz-fp-label,
+.mtz-fp-apt.is-remodel .mtz-fp-label,
+.mtz-fp-apt:hover .mtz-fp-label-bg,
+.mtz-fp-apt.is-hover .mtz-fp-label-bg,
+.mtz-fp-apt:focus-visible .mtz-fp-label-bg,
+.mtz-fp-apt.is-reserved .mtz-fp-label-bg,
+.mtz-fp-apt.is-sold .mtz-fp-label-bg,
+.mtz-fp-apt.is-remodel .mtz-fp-label-bg { opacity: 1; }
+
+/* ── Legendă ── */
+.mtz-fp-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.mtz-fp-legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.mtz-fp-legend__swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  background: var(--color-secondary);
+  flex-shrink: 0;
+}
+
+.mtz-fp-legend__swatch.is-available { background: var(--color-status-available); }
+.mtz-fp-legend__swatch.is-reserved  { background: var(--color-status-reserved); }
+.mtz-fp-legend__swatch.is-sold       { background: var(--color-status-sold); }
+.mtz-fp-legend__swatch.is-remodel    { background: var(--color-status-remodel); }
+
+/* ── Listă apartamente ── */
+.mtz-fp-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--color-outline-variant);
+}
+
+.mtz-fp-list__row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--color-outline-variant);
+  text-decoration: none;
+  transition: padding-left var(--transition-fast), background var(--transition-fast);
+}
+
+.mtz-fp-list__row:hover,
+.mtz-fp-list__row.is-hover {
+  background: var(--color-surface);
+  padding-left: var(--space-sm);
+}
+
+/* Rând în recompartimentare — neclickabil, estompat */
+.mtz-fp-list__row.is-remodel {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.mtz-fp-list__num {
+  font-weight: 700;
+  font-size: var(--text-base);
+  color: var(--color-text-primary);
+}
+
+.mtz-fp-list__meta {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* ── Stare „în curs de repartajare" ── */
+.mtz-fp-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 50vh;
+  padding: var(--space-2xl);
+  background: #fff;
+  border: 1px dashed var(--color-outline);
+  border-radius: var(--radius-md);
+}
+
+/* ── Fallback grilă apartamente (etaje fără plan SVG încă) ── */
+.mtz-fp-fallback {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-sm);
+}
+
+.mtz-fp-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: var(--space-md);
+  background: #fff;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.mtz-fp-card:hover {
+  border-color: var(--color-secondary);
+  transform: translateY(-2px);
+}
+
+.mtz-fp-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.mtz-fp-card__num {
+  font-weight: 700;
+  font-size: var(--text-lg);
+  color: var(--color-text-primary);
+}

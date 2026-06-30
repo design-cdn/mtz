@@ -1,0 +1,202 @@
+/* ============================================================
+   MTZ NORD RESIDENCE — Pagină disponibilități (tabel apartamente)
+   ============================================================ */
+
+/* ── Filtre status ── */
+.mtz-avail-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-xl);
+}
+
+.mtz-avail-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.6rem 1.15rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+  white-space: nowrap;
+}
+
+.mtz-avail-chip:hover {
+  border-color: var(--color-secondary);
+  color: var(--color-text-primary);
+}
+
+.mtz-avail-chip__count {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  opacity: 0.55;
+}
+
+.mtz-avail-chip.is-active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.mtz-avail-chip.is-active .mtz-avail-chip__count { opacity: 0.7; }
+
+/* ── Tabel ── */
+.mtz-avail-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.mtz-avail-table thead th {
+  text-align: left;
+  padding: 0 1.25rem var(--space-sm);
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-outline);
+  white-space: nowrap;
+}
+
+.mtz-avail-table th:last-child,
+.mtz-avail-table td:last-child { text-align: right; }
+
+.mtz-avail-table tbody tr {
+  border-bottom: 1px solid var(--color-outline-variant);
+  transition: background var(--transition-fast);
+}
+
+.mtz-avail-table tbody tr:hover { background: var(--color-surface); }
+
+.mtz-avail-table td {
+  padding: 1.35rem 1.25rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  color: var(--color-text-primary);
+  vertical-align: middle;
+}
+
+.mtz-avail-table .cell-floor {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
+}
+
+.mtz-avail-table .cell-apt { font-weight: 700; font-size: var(--text-lg); }
+.mtz-avail-table .cell-muted { color: var(--color-text-muted); }
+
+/* ── Badge status ── */
+.mtz-avail-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-outline-variant);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.mtz-avail-badge__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mtz-avail-badge.is-available .mtz-avail-badge__dot { background: var(--color-status-available); }
+.mtz-avail-badge.is-reserved  .mtz-avail-badge__dot { background: var(--color-status-reserved); }
+.mtz-avail-badge.is-sold      .mtz-avail-badge__dot { background: var(--color-status-sold); }
+.mtz-avail-badge.is-remodel   .mtz-avail-badge__dot { background: var(--color-status-remodel); }
+.mtz-avail-badge.is-sold,
+.mtz-avail-badge.is-remodel { color: var(--color-text-muted); }
+
+.mtz-avail-badge.is-pending {
+  color: var(--color-text-muted);
+  border-style: dashed;
+  border-color: var(--color-outline);
+}
+.mtz-avail-badge.is-pending .mtz-avail-badge__dot { background: var(--color-secondary); }
+
+/* Rând etaj în curs de repartajare */
+.mtz-avail-row--pending .cell-floor { color: var(--color-text-muted); }
+
+/* ── Link spre detalii ── */
+.mtz-avail-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-secondary);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: gap var(--transition-fast), color var(--transition-fast);
+}
+
+.mtz-avail-link:hover { color: var(--color-primary); gap: 0.65rem; }
+.mtz-avail-link .material-symbols-outlined { font-size: var(--text-base); }
+
+/* ── Stare „niciun rezultat" ── */
+.mtz-avail-empty {
+  padding: var(--space-2xl) var(--space-sm);
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+/* ── Responsive: rândurile devin carduri pe mobil ── */
+@media (max-width: 768px) {
+  .mtz-avail-table thead { display: none; }
+  .mtz-avail-table,
+  .mtz-avail-table tbody,
+  .mtz-avail-table tr,
+  .mtz-avail-table td { display: block; width: 100%; }
+
+  .mtz-avail-table tr {
+    border: 1px solid var(--color-outline-variant);
+    border-radius: var(--radius-md);
+    background: var(--color-background);
+    padding: var(--space-xs) var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  .mtz-avail-table tbody tr:hover { background: var(--color-background); }
+
+  .mtz-avail-table td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--color-outline-variant);
+    text-align: right;
+  }
+
+  .mtz-avail-table td:last-child { border-bottom: 0; padding-top: var(--space-sm); }
+
+  .mtz-avail-table td::before {
+    content: attr(data-label);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: var(--ls-wide);
+    color: var(--color-text-muted);
+    text-align: left;
+  }
+
+  .mtz-avail-table .cell-apt { font-size: var(--text-base); }
+}

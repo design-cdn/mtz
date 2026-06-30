@@ -43,11 +43,11 @@
   left: 50%;
   transform: translateX(-50%);
   align-items: center;
-  gap: var(--space-lg);
+  gap: 1.25rem;
   pointer-events: auto;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1152px) {
   .mtz-nav__links {
     display: flex;
   }
@@ -136,11 +136,25 @@
   border-bottom-color: rgba(255, 255, 255, 0.5);
 }
 
+/* Pe ecrane mari e spațiu suficient → text de nav mai mare/lizibil.
+   Sub 1280px nu apar deloc (hamburger), iar la 1280–1439 rămân 11px
+   ca să încapă fără să atingă butonul CTA. */
+@media (min-width: 1440px) {
+  .mtz-nav__links { gap: 1.5rem; }
+  .mtz-nav__link { font-size: 0.8125rem; }       /* 13px */
+  .mtz-nav__actions .mtz-btn-nav { font-size: 0.75rem; }  /* 12px CTA */
+}
+
+@media (min-width: 1680px) {
+  .mtz-nav__links { gap: 1.75rem; }
+  .mtz-nav__link { font-size: 0.875rem; }         /* 14px */
+}
+
 .mtz-btn-nav {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.625rem 1.5rem;
+  padding: 0.55rem 1.15rem;
   background-color: var(--color-dark);
   color: var(--color-text-light);
   font-size: var(--text-xs);
@@ -163,7 +177,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.625rem 1.25rem;
+  padding: 0.55rem 0.9rem;
   background: transparent;
   color: rgba(67, 58, 53, 0.55);
   font-size: var(--text-xs);
@@ -178,6 +192,14 @@
 
 .mtz-btn-wa:hover {
   color: var(--color-text-primary);
+}
+
+/* WA în nav = doar iconiță (compact) → eliberează spațiu pentru link-uri */
+.mtz-nav__wa-desktop {
+  padding: 0.55rem;
+}
+.mtz-nav__wa-desktop span {
+  display: none;
 }
 
 /* WA alb când nav-ul e transparent peste hero */
@@ -199,7 +221,7 @@
   border: none;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1152px) {
   .mtz-nav__hamburger {
     display: none;
   }

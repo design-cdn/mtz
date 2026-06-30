@@ -118,7 +118,7 @@
               value="1"
               required
             />
-            <label for="modal-gdpr" class="mtz-body-dark" style="font-size:var(--text-xs);cursor:pointer;">
+            <label for="modal-gdpr" class="mtz-body-dark" style="font-size:var(--text-sm);cursor:pointer;">
               {!! __('contact.field_gdpr', ['link' => '<a href="#" style="color:var(--color-secondary);">' . __('contact.field_gdpr_link') . '</a>']) !!}
             </label>
           </div>
