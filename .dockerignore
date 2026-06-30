@@ -1,0 +1,16 @@
+.git
+.gitignore
+.github
+node_modules
+vendor
+public/build
+public/hot
+.env
+.env.*
+.claude
+tests
+phpunit.xml
+Planuri MTZ
+etaje-1-2-3
+parter
+public/images/renderings
