@@ -1,0 +1,45 @@
+/* ── BENTO RANDĂRI DOLLHOUSE (home, sub hero) ── */
+
+.mtz-bento {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+}
+
+.mtz-bento__item {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+/* Prima placă — mare, 2×2 în stânga */
+.mtz-bento__item--big {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.mtz-bento__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-med);
+}
+
+.mtz-bento__item:hover .mtz-bento__img {
+  transform: scale(1.04);
+}
+
+.mtz-bento__cta {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-xl);
+}
+
+/* Mobil: 2 coloane — placa mare rămâne pătrat full-width, restul 2×2 dedesubt */
+@media (max-width: 768px) {
+  .mtz-bento {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

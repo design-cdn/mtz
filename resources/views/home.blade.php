@@ -156,6 +156,38 @@
   </section>
 
   {{-- ═══════════════════════════════════════════════
+       BENTO RANDĂRI — apartamente (dollhouse 3D)
+  ════════════════════════════════════════════════════ --}}
+  <section class="mtz-section-sm mtz-section-surface">
+    <div class="mtz-container">
+      @php
+        $bento = [
+          ['src' => 'images/dollhouse/ap-03.jpg', 'big' => true],
+          ['src' => 'images/dollhouse/ap-05.jpg'],
+          ['src' => 'images/dollhouse/ap-07.jpg'],
+          ['src' => 'images/dollhouse/ap-10.jpg'],
+          ['src' => 'images/dollhouse/ap-13.jpg'],
+        ];
+      @endphp
+      <div class="mtz-bento" data-animate="fade-up">
+        @foreach($bento as $b)
+          <div class="mtz-bento__item{{ ($b['big'] ?? false) ? ' mtz-bento__item--big' : '' }}">
+            <img
+              class="mtz-bento__img"
+              src="{{ asset($b['src']) }}"
+              alt="Randare 3D apartament — MTZ Nord Residence"
+              loading="lazy"
+            />
+          </div>
+        @endforeach
+      </div>
+      <div class="mtz-bento__cta" data-animate="fade-up">
+        <a href="{{ route('apartamente.index') }}" class="mtz-btn mtz-btn-primary">Vezi apartamentele</a>
+      </div>
+    </div>
+  </section>
+
+  {{-- ═══════════════════════════════════════════════
        DESPRE PROIECT
   ════════════════════════════════════════════════════ --}}
   <section id="proiect" class="mtz-section mtz-section-surface">
