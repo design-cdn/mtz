@@ -169,9 +169,9 @@
           ['src' => 'images/dollhouse/ap-13.jpg'],
         ];
       @endphp
-      <div class="mtz-bento" data-animate="fade-up">
+      <div class="mtz-bento" data-stagger="0.32">
         @foreach($bento as $b)
-          <div class="mtz-bento__item{{ ($b['big'] ?? false) ? ' mtz-bento__item--big' : '' }}">
+          <div class="mtz-bento__item{{ ($b['big'] ?? false) ? ' mtz-bento__item--big' : '' }}" data-animate="fade-up">
             <img
               class="mtz-bento__img"
               src="{{ asset($b['src']) }}"

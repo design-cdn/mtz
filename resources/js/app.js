@@ -89,14 +89,18 @@ function initFadeUpAnimations() {
 
   parentMap.forEach((siblings, parent) => {
     if (siblings.length > 1) {
-      // Multiple siblings: stagger
+      // Multiple siblings: stagger. Părintele poate suprascrie viteza cu
+      // data-stagger="0.3" (secunde) pentru un efect mai lent/dinamic.
+      const staggerVal = parent.dataset.stagger
+        ? parseFloat(parent.dataset.stagger)
+        : FADE_UP_STAGGER;
       gsap.fromTo(siblings,
         { opacity: 0, y: 32 },
         {
           opacity: 1,
           y: 0,
           duration: FADE_UP_DURATION,
-          stagger: FADE_UP_STAGGER,
+          stagger: staggerVal,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: parent,
